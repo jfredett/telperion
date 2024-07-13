@@ -1,0 +1,4 @@
+# `telperion`
+
+`telperion` contains all the host definitions for my environment, it pulls from other items
+underneath `minas-tarwon` to accomplish this.
