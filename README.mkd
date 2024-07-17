@@ -8,7 +8,7 @@ underneath `minas-tarwon` to accomplish this.
 `telperion` organizes and contains [[domains]], which in turn contain Each domain is a subdirectory,
 each containing a further subdirectory per [[role]]. 
 
-Separately, the `machines/` subdirectory contains hardware descriptions for each machine by it's
+Separately, the `cadaster/` subdirectory contains hardware descriptions for each machine by it's
 canonical name, as well as any other notes about the system, a change log for the system, etc.
 
 `telperion` relies on `narya`, `glamdring`, and `laurelin` to provide the modules it configures.
