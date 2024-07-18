@@ -6,34 +6,41 @@
     ./config.nix
   ];
 
-  nix = {
-    package = pkgs.nixFlakes;
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+  config = {
+
+    laurelin.infra = {
+      canon = "10.255.1.2";
     };
-  };
 
-  nixpkgs.config.allowUnfree = true;
+    nix = {
+      package = pkgs.nixFlakes;
+      settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+      };
+    };
 
-  services.xserver = {
-    enable = true;
+    nixpkgs.config.allowUnfree = true;
 
-    xkb.layout = "us";
-    xkb.variant = "";
-  };
+    services.xserver = {
+      enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+    };
 
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    services.displayManager.sddm.enable = true;
+    services.xserver.desktopManager.plasma5.enable = true;
+
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 }
