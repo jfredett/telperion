@@ -43,10 +43,11 @@
         ]
       },
       "locked": {
-        "dirtyRev": "2c7284f67a9278480023b34001967886554929ae-dirty",
-        "dirtyShortRev": "2c7284f-dirty",
-        "lastModified": 1720912064,
-        "narHash": "sha256-klXFIFYxXLggrWZ+woqHJ0qS3lWIPNcentq4pzpP4kI=",
+        "lastModified": 1721315186,
+        "narHash": "sha256-2wjFPl+NyWtp6tM1sbBxTt76O5JwlCL2Vj+fphPEFk4=",
+        "ref": "refs/heads/main",
+        "rev": "c610a64aef43cdfb273d0b54f44a502a3a631894",
+        "revCount": 4,
         "type": "git",
         "url": "file:/home/jfredett/code/minas-tarwon/laurelin"
       },
@@ -57,11 +58,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1720957393,
-        "narHash": "sha256-oedh2RwpjEa+TNxhg5Je9Ch6d3W1NKi7DbRO1ziHemA=",
+        "lastModified": 1721138476,
+        "narHash": "sha256-+W5eZOhhemLQxelojLxETfbFbc19NWawsXBlapYpqIA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "693bc46d169f5af9c992095736e82c3488bf7dbb",
+        "rev": "ad0b5eed1b6031efaed382844806550c3dcb4206",
         "type": "github"
       },
       "original": {
