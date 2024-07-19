@@ -1,9 +1,5 @@
 inputs@{ config, pkgs, lib, modulesPath, ... }: {
   imports = [
-    ./hardware.nix
-    ./storage.nix
-    ./network.nix
-
     <common/common.nix>
     <common/netbootable.nix>
     <common/vm-host.nix>

@@ -1,9 +1,12 @@
 { config, lib, pkgs, modulesPath, dns, laurelin, ... }: {
   imports = [
-    ./hardware.nix
-    ./network.nix
-    ./storage.nix
-    ./config.nix
+     ./hardware.nix
+     ./network.nix
+
+    # FIXME: these rely on common modules from ereshkigal, so I'll need to swap them for laurelin
+    # equivalents
+    #./storage.nix
+    #./config.nix
   ];
 
   config = {
