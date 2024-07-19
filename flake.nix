@@ -21,34 +21,29 @@
     with dns.lib.combinators;
     with nixpkgs.lib;
     let
-      configs = map (c: c.laurelin.infra.dns) (attrNames self.nixosConfigurations);
-      root = import ./cadaster/canon-zone.nix { inherit dns; };
-      canonzone = mkMerge (configs // [root]);
+      configs = map (c: c.config.laurelin.infra.dns) (attrValues self.nixosConfigurations);
+      root = import ./cadaster { inherit dns; };
+      allconfs = mkMerge (configs ++ root);
     in {
-      zones = builtins.trace canonzone {
-        canon = toString (dns.lib.evalZone "canon" (mkMerge [
-          self.nixosConfigurations.archimedes.config.laurelin.infra.dns
-          self.nixosConfigurations.maiasaura.config.laurelin.infra.dns
-          self.nixosConfigurations.dragon-of-perdition.config.laurelin.infra.dns
-          root
-          ]));
-        };
-      };
-
-      nixosConfigurations = let
-        configFor = name: nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            laurelin.nixosModules.default
-            ./cadaster/${name}
-          ];
-
-          specialArgs = { inherit dns; };
-        };
-      in {
-        archimedes = configFor "archimedes";
-        maiasaura = configFor "maiasaura";
-        dragon-of-perdition = configFor "dragon-of-perdition";
+      zones = {
+        canon = toString (dns.lib.evalZone "canon" allconfs);
       };
     };
-  }
+
+    nixosConfigurations = let
+      configFor = name: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          laurelin.nixosModules.default
+          ./cadaster/${name}
+        ];
+
+        specialArgs = { inherit dns; };
+      };
+    in {
+      archimedes = configFor "archimedes";
+      maiasaura = configFor "maiasaura";
+      dragon-of-perdition = configFor "dragon-of-perdition";
+    };
+  };
+}
