@@ -1,0 +1,5 @@
+# Voltaire
+
+Voltaire is a (presently dead at time of entry) Cisco 3750E 48 port switch. It was the core switch
+of the network, it is being replaced by [[Condorcet]]
+
