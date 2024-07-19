@@ -44,6 +44,7 @@
       archimedes = configFor "archimedes";
       maiasaura = configFor "maiasaura";
       dragon-of-perdition = configFor "dragon-of-perdition";
+      babylon-the-great = configFor "babylon-the-great";
     };
   };
 }
