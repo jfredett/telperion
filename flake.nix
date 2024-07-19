@@ -17,23 +17,21 @@
 
   outputs = inputs @ { self, nixpkgs, dns, laurelin, ... }: {
 
-    dns = with dns.lib.combinators; let
-      cfg = {
-        # This should be some function of the config that maps over all it's addresses and so on.
-        archimedes = self.nixosConfigurations.archimedes.config;
-        maiasaura = self.nixosConfigurations.maiasaura.config;
-        root = import ./cadaster/canon-zone.nix { inherit dns; };
-      };
-
+    dns =
+    with dns.lib.combinators;
+    with nixpkgs.lib;
+    let
+      configs = map (c: c.laurelin.infra.dns) (attrNames self.nixosConfigurations);
+      root = import ./cadaster/canon-zone.nix { inherit dns; };
+      canonzone = mkMerge (configs // [root]);
     in {
-      zones = {
-        canon = toString (dns.lib.evalZone "canon" (
-          nixpkgs.lib.mkMerge [
-            cfg.archimedes.laurelin.infra.dns
-            cfg.maiasaura.laurelin.infra.dns
-            cfg.root
-          ]
-          ));
+      zones = builtins.trace canonzone {
+        canon = toString (dns.lib.evalZone "canon" (mkMerge [
+          self.nixosConfigurations.archimedes.config.laurelin.infra.dns
+          self.nixosConfigurations.maiasaura.config.laurelin.infra.dns
+          self.nixosConfigurations.dragon-of-perdition.config.laurelin.infra.dns
+          root
+          ]));
         };
       };
 
@@ -50,6 +48,7 @@
       in {
         archimedes = configFor "archimedes";
         maiasaura = configFor "maiasaura";
+        dragon-of-perdition = configFor "dragon-of-perdition";
       };
     };
   }
