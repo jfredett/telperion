@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [ <common/wireless.nix> ];
- 
   networking = { 
     hostName = "toto";
 
@@ -77,8 +75,12 @@
         };
       };
       */
-      wlo2.useDHCP = true;
     };
   };
-  services.emerald-city-wifi.interface = "wlo2";
+
+  narya.wireless = {
+    enable = true;
+    interface = "wlo2";
+    dhcp = true;
+  };
 }

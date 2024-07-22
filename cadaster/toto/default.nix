@@ -1,9 +1,9 @@
-{ config, lib, pkgs, modulesPath, dns, laurelin, ... }: {
+{ config, lib, pkgs, modulesPath, ... }: {
   imports = [
     ./hardware.nix
     ./network.nix
     ./storage.nix
-    ./config.nix
+    ./config.nix # Temporary additional config
   ];
 
   config = {
