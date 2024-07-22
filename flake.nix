@@ -56,6 +56,7 @@
       maiasaura = configFor "maiasaura";
       dragon-of-perdition = configFor "dragon-of-perdition";
       babylon-the-great = configFor "babylon-the-great";
+      toto = configFor "toto";
     };
   };
 }
