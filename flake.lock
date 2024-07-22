@@ -211,10 +211,11 @@
         "nur": "nur"
       },
       "locked": {
-        "dirtyRev": "d42705d0db6c2a7994f4ed2c0ed4061ec8451b9b-dirty",
-        "dirtyShortRev": "d42705d-dirty",
-        "lastModified": 1721144685,
+        "lastModified": 1721616097,
         "narHash": "sha256-JqQ6FBzMtGFBrGXqVxRJAaThjP0wuda9hSFIpcMS5SY=",
+        "ref": "refs/heads/main",
+        "rev": "46627cdd864cccae3b2c4074733ae35cfde65e22",
+        "revCount": 87,
         "type": "git",
         "url": "file:/home/jfredett/code/minas-tarwon/glamdring"
       },
@@ -274,10 +275,11 @@
         ]
       },
       "locked": {
-        "dirtyRev": "8e8d55154ef19256458a7dc2df74687d215e58c5-dirty",
-        "dirtyShortRev": "8e8d551-dirty",
-        "lastModified": 1721412456,
-        "narHash": "sha256-k7D8nwXrO4q72ewuaVJC2c4cICh3UanBljzPVvpcwIM=",
+        "lastModified": 1721661799,
+        "narHash": "sha256-J6EIJD06qY/MFPNzo8va9iOHzuyIBhAoSuJqO9UhPEU=",
+        "ref": "refs/heads/main",
+        "rev": "9e968e6e55f12860aaf9e7d868d072194fb33247",
+        "revCount": 9,
         "type": "git",
         "url": "file:/home/jfredett/code/minas-tarwon/laurelin"
       },
@@ -293,11 +295,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721595466,
-        "narHash": "sha256-s4YacGyfCz5kw476nQoTNOgdfAL/v+QfzPES+yMb6e4=",
+        "lastModified": 1721616044,
+        "narHash": "sha256-mWtKWcJtUv3yIjHjstw0fnbc5J9ZSsmnUSXRSkE3MHU=",
         "ref": "refs/heads/main",
-        "rev": "2144bb833aeb3e51bfe57d89b0b9653f8e258b0d",
-        "revCount": 4,
+        "rev": "13ae11182f3b26060b6a2c617ca73c5eb136be23",
+        "revCount": 5,
         "type": "git",
         "url": "file:/home/jfredett/code/minas-tarwon/narya"
       },

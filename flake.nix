@@ -52,6 +52,8 @@
         specialArgs = { inherit dns; };
       };
     in {
+      # TODO: wrap these in a `canon` parent and adjust appropriately. Other configs should be
+      # provided via other parents.
       archimedes = configFor "archimedes";
       maiasaura = configFor "maiasaura";
       dragon-of-perdition = configFor "dragon-of-perdition";
