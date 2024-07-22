@@ -9,4 +9,5 @@
   (import ./mirzakhani { inherit dns; })
   (import ./nancy { inherit dns; })
   (import ./work { inherit dns; })
+  (import ./toto { inherit dns; })
 ]

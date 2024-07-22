@@ -1,5 +1,4 @@
 { config, lib, pkgs, modulesPath, ... }: let
-
 in {
   networking = {
     hostName = "dragon-of-perdition";
