@@ -13,9 +13,19 @@
       url = "git+file:/home/jfredett/code/minas-tarwon/laurelin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    narya = {
+      url = "git+file:/home/jfredett/code/minas-tarwon/narya";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    glamdring = {
+      url = "git+file:/home/jfredett/code/minas-tarwon/glamdring";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, dns, laurelin, ... }: {
+  outputs = inputs @ { self, nixpkgs, dns, laurelin, narya, glamdring, ... }: {
 
     dns =
     with dns.lib.combinators;
@@ -34,6 +44,7 @@
       configFor = name: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          narya.nixosModules.default
           laurelin.nixosModules.default
           ./cadaster/${name}
         ];
