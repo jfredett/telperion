@@ -21,7 +21,5 @@ inputs@{ config, pkgs, lib, modulesPath, ... }: {
     backup_path = "/mnt/vm/${config.networking.hostName}";
     bridge_name = "ec-dmz-bridge";
   };
-
-  system.stateVersion = "23.11"; # Did you read the comment?
 }
 
