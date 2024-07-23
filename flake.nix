@@ -38,6 +38,13 @@
       zones = {
         canon = toString (dns.lib.evalZone "canon" allconfs);
       };
+      hosts = {
+        canon = ''
+          127.0.0.1 localhost
+          ::1 localhost
+          # TODO: Implement the rest of this
+        '';
+      };
     };
 
     nixosConfigurations = let
