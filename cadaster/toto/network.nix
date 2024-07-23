@@ -3,6 +3,10 @@
   networking = { 
     hostName = "toto";
 
+
+
+    #nftables.enable = true;
+
     defaultGateway = {
       address = "10.255.0.1";
       interface = "enp2s0";
@@ -17,10 +21,8 @@
 
     firewall = {
       allowedTCPPorts = [ 22 ];
-      interfaces.enp2s0.allowedTCPPorts = [ 22 ];
-      interfaces."enp2s0_dns".allowedTCPPorts = [ 22 ];
-      #interfaces."enp2s0_canon".allowedTCPPorts = [ 22 ];
-     # interfaces."enp2s0_120".allowedTCPPorts = [ 22 ];
+      interfaces.enp2s0.allowedTCPPorts = [ 22 53 ];
+      interfaces."enp2s0_dns".allowedTCPPorts = [ 22 53 ];
     };
 
     useDHCP = false;
@@ -32,9 +34,6 @@
             address = "10.255.1.9";
             prefixLength = 16;
           }];
-          routes = [
-            { address = "10.255.0.0"; via = "10.255.0.1"; prefixLength = 16; }
-          ];
         };
       };
       "enp2s0_dns" = {
@@ -44,9 +43,6 @@
             address = "10.255.0.3";
             prefixLength = 24;
           }];
-          routes = [
-            { address = "10.255.0.0"; via = "10.255.0.1"; prefixLength = 16; }
-          ];
         };
       };
       /*
