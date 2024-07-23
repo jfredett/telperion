@@ -9,4 +9,5 @@ inputs@{ dns, ... }: [
   (import ./mirzakhani inputs)
   (import ./nancy inputs)
   (import ./work inputs)
+  (import ./ifrit inputs)
 ]
