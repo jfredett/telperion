@@ -2,10 +2,10 @@
   nsIP = "10.255.0.2";
 in {
   SOA = {
-    nameServer = "ns.canon";
+    nameServer = "ns.canon.";
     # TODO: Ideally this is calculated for me at build time. Though it does make it
     # nonhermetic, can this be a hash, or does DNS rely on it being sequential?
-    serial = 202407181252;
+    serial = 2024072312;
     adminEmail = "jfredett@gmail.com";
   };
 
