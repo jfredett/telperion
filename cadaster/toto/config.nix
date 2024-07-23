@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, root, ... }: {
 
   narya.users = {
     jfredett = true;
@@ -11,6 +10,17 @@
     enable = true;
     # TODO: Change the name, maybe move nfs config into here?
     image_path = "/mnt/emerald_city/netboot";
+  };
+
+  laurelin.services.dns = {
+    enable = true;
+    dns = {
+      zone = root.dns.zones.canon;
+    };
+    domains = {
+      "*.canon" = "ns.canon";
+    };
+    interface = "enp2s0_dns";
   };
 
   laurelin.nfs = {

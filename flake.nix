@@ -44,12 +44,13 @@
       configFor = name: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          { system.stateVersion = "24.11"; }
           narya.nixosModules.default
           laurelin.nixosModules.default
           ./cadaster/${name}
         ];
 
-        specialArgs = { inherit dns; };
+        specialArgs = { inherit dns; root = self; };
       };
     in {
       # TODO: wrap these in a `canon` parent and adjust appropriately. Other configs should be
