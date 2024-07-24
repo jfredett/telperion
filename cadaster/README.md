@@ -39,8 +39,9 @@ Of this `/16`, the `10.255.0.0/24` network is reserved for specific items, inclu
 2. The network switch at `10.255.0.2/32`
 3. The DNS server at `10.255.0.3/32`
 4. The boot server at `10.255.0.4/32`
-5. All remaining IPs within `10.255.0.0/24` are reserved for arbitrary future use.
-6. All IPs in `10.255.1.0/16` are assigned to machines as needed.
+5. DRAC/other remote console stuff lives in `10.255.255.0/24`
+6. All remaining IPs within `10.255.0.0/24` are reserved for arbitrary future use.
+7. All IPs in `10.255.1.0/16` are assigned to machines as needed.
 
 These IPs may be virtual, and thus may point to clusters of machines hosted elsewhere. These may
 also point to a machine that has a second address on this network. i.e., if I host DNS on a

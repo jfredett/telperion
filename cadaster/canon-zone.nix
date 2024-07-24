@@ -11,5 +11,10 @@ in {
 
   subdomains = {
     ns.A = [(a nsIP)];
+
+    # TODO: This should be in the respective part of the cadaster, built into the laurelin.dns
+    # module
+    "drac.dragon-of-perdition".A = [(a "10.255.255.1")];
+    "drac.babylon-the-great".A = [(a "10.255.255.2")];
   };
 }
