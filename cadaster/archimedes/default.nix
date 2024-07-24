@@ -4,7 +4,6 @@
     ./network.nix
     ./storage.nix
     ./config.nix
-
   ];
 
   config = {
