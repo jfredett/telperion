@@ -20,6 +20,7 @@
     };
 
     firewall = {
+      enable = false;
       allowedTCPPorts = [ 22 ];
       interfaces.enp2s0.allowedTCPPorts = [ 22 53 ];
       interfaces."enp2s0_dns".allowedTCPPorts = [ 22 53 ];

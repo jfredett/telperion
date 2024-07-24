@@ -5,7 +5,7 @@
 
 
   services.emerald-city.nfs = {
-    "nancy.emerald.city" = [
+    "nancy.canon" = [
       {
         name = "vm";
         path = "/mnt/vm";

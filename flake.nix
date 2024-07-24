@@ -19,13 +19,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur.url = "github:nix-community/NUR";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     glamdring = {
       url = "git+file:/home/jfredett/code/minas-tarwon/glamdring";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, dns, laurelin, narya, glamdring, ... }: {
+  outputs = inputs @ { self, nixpkgs, dns, laurelin, narya, glamdring, home-manager, nur, ... }: {
 
     dns =
     with dns.lib.combinators;
@@ -54,10 +61,14 @@
           { system.stateVersion = "24.11"; }
           narya.nixosModules.default
           laurelin.nixosModules.default
+          # FIXME: I don't think these two things should be here, they should be behind
+          # laurelin/narya at least, ideally behind glamdring.
+          home-manager.nixosModules.home-manager
+          nur.nixosModules.nur
           ./cadaster/${name}
         ];
 
-        specialArgs = { inherit dns; root = self; };
+        specialArgs = { inherit dns; root = self; inherit glamdring; };
       };
     in {
       # TODO: wrap these in a `canon` parent and adjust appropriately. Other configs should be
