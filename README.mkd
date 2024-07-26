@@ -12,3 +12,11 @@ Separately, the `cadaster/` subdirectory contains hardware descriptions for each
 canonical name, as well as any other notes about the system, a change log for the system, etc.
 
 `telperion` relies on `narya`, `glamdring`, and `laurelin` to provide the modules it configures.
+
+## Pronounciation
+
+Telperion is the name of one of the two trees of Valinor in J.R.R. Tolkien's legendarium. I
+pronounce it "tell-PEH-ree-on", emphasis on the second syllable. I trill the 'r', and it has a
+vaguely Spanish quality about it. I justify this by the etymology of the name, "telperion" is from
+"telpë", which means "silver" in Quenya, and the suffix "-ion" which means "descendant" or "son of".
+I don't know if that's actually right, but it sounds nice to me.
