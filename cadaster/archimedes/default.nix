@@ -7,46 +7,43 @@
   ];
 
   config = {
-    laurelin.infra = {
-      canon = "10.255.1.1";
-    };
-
-    nix = {
-      package = pkgs.nixFlakes;
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
+    laurelin = {
+      services = {
+        _1password = {
+          enable = true;
+          withGUI = true;
+        };
+        virtualbox = {
+          enable = true;
+          users = [ "jfredett" ];
+        };
+      };
+      infra.canon = "10.255.1.1";
+      nfs = {
+        "nancy.canon" = [
+          {
+            name = "emerald_city_netboot";
+            path = "/mnt/emerald_city_netboot";
+            host_path = "volume1";
+          }
+          { 
+            name = "Lab";
+            path = "/mnt/Lab";
+            host_path = "volume1";
+          }
+          {
+            name = "docker";
+            path = "/mnt/docker";
+            host_path = "volume1";
+          }
+          {
+            name = "Media";
+            path = "/mnt/Media";
+            host_path = "volume1";
+          }
         ];
       };
     };
-
-    laurelin.nfs = {
-      "nancy.canon" = [
-        {
-          name = "emerald_city_netboot";
-          path = "/mnt/emerald_city_netboot";
-          host_path = "volume1";
-        }
-        { 
-          name = "Lab";
-          path = "/mnt/Lab";
-          host_path = "volume1";
-        }
-        {
-          name = "docker";
-          path = "/mnt/docker";
-          host_path = "volume1";
-        }
-        {
-          name = "Media";
-          path = "/mnt/Media";
-          host_path = "volume1";
-        }
-      ];
-    };
-
-    nixpkgs.config.allowUnfree = true;
 
     services.xserver.enable = true;
     services.xserver.displayManager.lightdm.enable = true;

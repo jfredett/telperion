@@ -13,4 +13,16 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  nix = {
+    package = pkgs.nixFlakes;
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+  };
+
+  nixpkgs.config.allowUnfree = true;
 }
