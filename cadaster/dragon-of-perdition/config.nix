@@ -1,13 +1,10 @@
 inputs@{ config, pkgs, lib, modulesPath, ... }: {
-  imports = [
-    <common/common.nix>
-    <common/netbootable.nix>
-    <common/vm-host.nix>
-  ];
-
   environment.noXlibs = false;
 
-  system.emerald-city.netbootable.enable = true;
+  laurelin = {
+    netbootable = true;
+    mac = "90:8d:6e:c3:60:64";
+  };
 
   environment.systemPackages = with pkgs; [
     libvirt
@@ -16,10 +13,12 @@ inputs@{ config, pkgs, lib, modulesPath, ... }: {
 
   networking.firewall.allowedTCPPorts = [ 22 5900 ];
 
+  /*
   emerald-city.services.vm-host = {
     enable = true;
     backup_path = "/mnt/vm/${config.networking.hostName}";
     bridge_name = "ec-dmz-bridge";
   };
+  */
 }
 

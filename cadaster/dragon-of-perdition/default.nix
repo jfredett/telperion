@@ -6,12 +6,17 @@
     # FIXME: these rely on common modules from ereshkigal, so I'll need to swap them for laurelin
     # equivalents
     #./storage.nix
-    #./config.nix
+    ./config.nix
   ];
 
   config = {
     laurelin.infra = {
       canon = "10.255.1.3";
+    };
+
+    narya.users = {
+      jfredett = true;
+      builder = true;
     };
 
     nix = {
@@ -25,14 +30,5 @@
     };
 
     nixpkgs.config.allowUnfree = true;
-
-    services.xserver.enable = true;
-    services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.desktopManager.lxqt.enable = true;
-
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
   };
 }
