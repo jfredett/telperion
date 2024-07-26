@@ -59,6 +59,7 @@
         system = "x86_64-linux";
         modules = [
           { system.stateVersion = "24.11"; }
+
           narya.nixosModules.default
           laurelin.nixosModules.default
           # FIXME: I don't think these two things should be here, they should be behind
@@ -68,7 +69,7 @@
           ./cadaster/${name}
         ];
 
-        specialArgs = { inherit dns; root = self; inherit glamdring; };
+        specialArgs = { root = self; inherit glamdring laurelin dns; };
       };
     in {
       # TODO: wrap these in a `canon` parent and adjust appropriately. Other configs should be
