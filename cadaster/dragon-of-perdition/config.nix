@@ -1,4 +1,8 @@
 inputs@{ config, pkgs, lib, modulesPath, laurelin, ... }: {
+  imports = [
+    laurelin.nixosModules.netbootable
+  ];
+  config = {
   environment.noXlibs = false;
 
   laurelin = {
@@ -26,5 +30,6 @@ inputs@{ config, pkgs, lib, modulesPath, laurelin, ... }: {
   ];
 
   networking.firewall.allowedTCPPorts = [ 22 5900 ];
+};
 }
 

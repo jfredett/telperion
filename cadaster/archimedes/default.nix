@@ -1,13 +1,15 @@
 { config, lib, pkgs, modulesPath, dns, laurelin, glamdring, home-manager, ... }: {
   imports = [
+    ../common.nix
     ./hardware.nix
     ./network.nix
     ./storage.nix
-    ./config.nix
   ];
 
   config = {
     laurelin = {
+      infra.canon = "10.255.1.1";
+
       services = {
         _1password = {
           enable = true;
@@ -17,8 +19,12 @@
           enable = true;
           users = [ "jfredett" ];
         };
+        window-manager = {
+          enable = true;
+          manager = "lxqt";
+        };
       };
-      infra.canon = "10.255.1.1";
+
       nfs = {
         "nancy.canon" = [
           {
@@ -43,15 +49,6 @@
           }
         ];
       };
-    };
-
-    services.xserver.enable = true;
-    services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.desktopManager.lxqt.enable = true;
-
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
     };
 
     # TODO: move this into the users module in narya.

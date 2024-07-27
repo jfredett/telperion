@@ -1,46 +1,27 @@
 { config, pkgs, ... }: {
   imports = [ 
+    ../common.nix
     ./hardware.nix
     ./network.nix
     ./storage.nix
-    ./config.nix
   ];
 
   config = {
 
-    laurelin.infra = {
-      canon = "10.255.1.2";
-    };
+    laurelin = {
+      infra.canon = "10.255.1.2";
 
-    nix = {
-      package = pkgs.nixFlakes;
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
+      services = {
+        window-manager = {
+          enable = true;
+          manager = "kde";
+        };
       };
     };
 
-    nixpkgs.config.allowUnfree = true;
-
-    services.xserver = {
-      enable = true;
-
-      xkb.layout = "us";
-      xkb.variant = "";
-    };
-
-    services.displayManager.sddm.enable = true;
-    services.xserver.desktopManager.plasma5.enable = true;
-
-    hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
+    telperion = {
+      sound = true;
+      standardPackages = true;
     };
   };
 }
