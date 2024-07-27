@@ -31,16 +31,10 @@
       };
     };
 
-    wireless = {
-      userControlled.enable = true;
+    narya.wireless = {
       enable = true;
-      interfaces = [ "wlp1s0" ];
-      networks = {
-        "Emerald City" = {
-          # BUG: Hardcoded secret
-          psk = "PASSWORD";
-        };
-      };
+      interface = "wlp1s0";
+      dhcp = true;
     };
   };
 }

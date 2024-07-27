@@ -27,16 +27,10 @@
       wlp61s0.useDHCP = true;
     };
 
-    wireless = {
-      userControlled.enable = true;
+    narya.wireless = {
       enable = true;
-      interfaces = [ "wlp61s0" ];
-      networks = {
-        "Emerald City" = {
-          # BUG: Hardcoded secret
-          psk = "PASSWORD";
-        };
-      };
+      interface = "wlp61s0";
+      dhcp = true;
     };
   };
 }
