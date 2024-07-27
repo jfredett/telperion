@@ -9,7 +9,11 @@
   config = {
 
     laurelin = {
-      infra.canon = "10.255.1.2";
+      infra = {
+        canon = "10.255.1.2";
+        sound.enable = true;
+        standard-packages.enable = true;
+      };
 
       services = {
         window-manager = {
@@ -17,11 +21,7 @@
           manager = "kde";
         };
       };
-    };
 
-    telperion = {
-      sound = true;
-      standardPackages = true;
     };
   };
 }

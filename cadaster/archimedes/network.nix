@@ -26,11 +26,11 @@
       };
       wlp61s0.useDHCP = true;
     };
+  };
 
-    narya.wireless = {
-      enable = true;
-      interface = "wlp61s0";
-      dhcp = true;
-    };
+  narya.wireless = {
+    enable = true;
+    interface = "wlp61s0";
+    dhcp = true;
   };
 }

@@ -8,7 +8,11 @@
 
   config = {
     laurelin = {
-      infra.canon = "10.255.1.1";
+      infra = {
+        canon = "10.255.1.1";
+        sound.enable = true;
+        standard-packages.enable = true;
+      };
 
       services = {
         _1password = {

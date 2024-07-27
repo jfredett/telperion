@@ -80,5 +80,17 @@
       babylon-the-great = configFor "babylon-the-great";
       toto = configFor "toto";
     };
+
+    domains = {
+      "emerald.city" = {
+        domains = {
+          barge = ./emerald.city/domains/barge.xml;
+          pinky = ./emerald.city/domains/pinky.xml;
+        };
+        networks = {
+          ec-net = ./emerald.city/networks/ec-net.xml;
+        };
+      };
+    };
   };
 }
