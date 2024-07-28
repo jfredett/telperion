@@ -17,14 +17,9 @@
   };
 
   config = let
-    audio = {
-    };
-
-    standard-packages = {
-    };
-
     cfg = config.telperion;
   in {
+    # TODO: Move this to laurelin
     services.keyd = {
       enable = true;
       keyboards = {
@@ -36,6 +31,5 @@
         };
       };
     };
-  } // (mkIf cfg.sound audio)
-  // (mkIf cfg.standardPackages standard-packages);
+  }
 }

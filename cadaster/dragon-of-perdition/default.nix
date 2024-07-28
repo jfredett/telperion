@@ -7,8 +7,6 @@
     # equivalents
     #./storage.nix
 
-    ./config.nix
-
     laurelin.nixosModules.netbootable
   ];
 
@@ -25,20 +23,39 @@
         canon = "10.255.1.3";
         standard-packages.enable = true;
       };
-      netbootable = true;
-      mac = "90:8d:6e:c3:60:64";
-      services.vm-host = {
-        enable = true;
-        backup_path = "/mnt/vm/${config.networking.hostName}";
-        bridge_name = "ec-dmz-bridge";
-        loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
-          domains = [
-            (loadFromFile domains.pinky)
-          ];
-          networks = [
-            (loadFromFile networks.ec-net)
-          ];
+
+      netboot = {
+        netbootable = true;
+        mac = "90:8d:6e:c3:60:64";
+      };
+
+      services = {
+        vm-host = {
+          enable = true;
+          backup_path = "/mnt/vm/${config.networking.hostName}";
+          bridge_name = "ec-dmz-bridge";
+          loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
+            domains = [
+              (loadFromFile domains.pinky)
+            ];
+            networks = [
+              (loadFromFile networks.ec-net)
+            ];
+          };
         };
+      };
+
+      nfs = {
+        "nancy.canon" = [
+          {
+            name = "vm";
+            path = "/mnt/vm";
+            host_path = "volume1";
+            user = "root";
+            group = "root";
+            options = "defaults,hard,fg";
+          }
+        ];
       };
     };
 

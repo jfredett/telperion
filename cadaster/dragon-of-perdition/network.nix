@@ -17,7 +17,7 @@ in {
 
     vlans = {
       bond_bridge = {
-        id = 10;
+        id = 1; # TODO: Actually set this up for real, the switch needs adjusting
         interface = "bond";
       };
     };
@@ -38,7 +38,7 @@ in {
 
     bonds = {
       bond = {
-        interfaces = [ "eno1" "eno2" "eno3" "eno4" ];
+        interfaces = [ "eno1" "eno2" "eno3" ];
         driverOptions = {
           # https://www.kernel.org/doc/Documentation/networking/bonding.txt
           miimon = "10"; # Link monitoring frequency in ms
@@ -49,10 +49,8 @@ in {
 
     bridges = {
       ec-dmz-bridge = {
-        interfaces = [ "bond_bridge" ];
+        interfaces = [ "eno4" ];
       };
     };
-
   };
-
 }

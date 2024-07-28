@@ -32,12 +32,9 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, dns, laurelin, narya, glamdring, home-manager, nur, ... }: {
+  outputs = inputs @ { self, nixpkgs, dns, laurelin, narya, glamdring, home-manager, nur, ... }: rec {
 
-    dns =
-    with dns.lib.combinators;
-    with nixpkgs.lib;
-    let
+    dns = with dns.lib.combinators; with nixpkgs.lib; let
       configs = map (c: c.config.laurelin.infra.dns) (attrValues self.nixosConfigurations);
       root = import ./cadaster { inherit dns; };
       allconfs = mkMerge (configs ++ root);
@@ -54,7 +51,33 @@
       };
     };
 
-    nixosConfigurations = let
+    # This needs to be flat, but I want to store it in a more structured way, time to add another
+    # layer.
+    nixosConfigurations = with builtins; let
+      mkFlat = domain: acc: el: acc // { "${domain}.${el}" = self.nixosConfigTree."${domain}"."${el}"; };
+      flatten = domain: branch: foldl' (mkFlat domain) {} (attrNames branch."${domain}");
+      cadaster = flatten "cadaster" self.nixosConfigTree;
+      emerald-city = flatten "emerald.city" self.nixosConfigTree;
+    in cadaster // emerald-city;
+
+    nixosConfigTree = let
+      vmConfigFor = path: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          { system.stateVersion = "24.11"; }
+
+          narya.nixosModules.default
+          laurelin.nixosModules.default
+
+          # FIXME: I don't think these two things should be here, they should be behind
+          # laurelin/narya at least, ideally behind glamdring.
+          home-manager.nixosModules.home-manager
+          nur.nixosModules.nur
+          path
+        ];
+
+        specialArgs = { root = self; inherit glamdring laurelin dns; };
+      };
       configFor = name: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -74,13 +97,23 @@
     in {
       # TODO: wrap these in a `canon` parent and adjust appropriately. Other configs should be
       # provided via other parents.
-      archimedes = configFor "archimedes";
-      maiasaura = configFor "maiasaura";
-      dragon-of-perdition = configFor "dragon-of-perdition";
-      babylon-the-great = configFor "babylon-the-great";
-      toto = configFor "toto";
+        # TODO: This should be named 'canon' not 'cadaster', and I should reverse the order (hostname
+        # first) to match the DNS zone.
+      cadaster = {
+        archimedes = configFor "archimedes";
+        maiasaura = configFor "maiasaura";
+        dragon-of-perdition = configFor "dragon-of-perdition";
+        babylon-the-great = configFor "babylon-the-great";
+        toto = configFor "toto";
+      };
+      "emerald.city" = {
+        pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
+        barge = vmConfigFor ./emerald.city/roles/barge.nix;
+      };
     };
 
+    # TODO: I don't like this name, maybe this is like, vmConfigs? libvirtConfigs? Eventually it
+    # should have a more rich structure anyway...
     domains = {
       "emerald.city" = {
         domains = {
