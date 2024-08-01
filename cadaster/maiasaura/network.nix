@@ -35,6 +35,6 @@
   narya.wireless = {
     enable = true;
     interface = "wlp1s0";
-    dhcp = true;
+    dhcp = false;
   };
 }
