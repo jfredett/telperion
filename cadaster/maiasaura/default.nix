@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, glamdring, ... }: {
   imports = [ 
     ../common.nix
     ./hardware.nix
@@ -26,5 +26,21 @@
         };
       };
     };
+
+    narya.users = {
+      jfredett = true;
+      media = true;
+      builder = true;
+    };
+
+    # TODO: move this into the users module in narya.
+    home-manager = {
+      backupFileExtension = "backup";
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users.media = glamdring.homeConfigurations.media;
+      users.jfredett = glamdring.homeConfigurations.jfredett;
+    };
+
   };
 }

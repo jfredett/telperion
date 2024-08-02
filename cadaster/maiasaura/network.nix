@@ -5,13 +5,16 @@
 
   networking = {
     nftables.enable = true;
+
     firewall = {
       allowedTCPPorts = [ 22 ];
-      interfaces = {
-        enp60s0 = {
-          allowedTCPPorts = [ 22 ];
-        };
-      };
+    };
+
+    nameservers = [ "10.255.0.3" ];
+
+    defaultGateway = {
+      address = "192.168.1.1";
+      interface = "wlp1s0";
     };
 
     useDHCP = false;
@@ -24,9 +27,6 @@
             address = "192.168.1.5";
             prefixLength = 24;
           }];
-          routes = [
-            { address = "192.168.1.0"; via = "192.168.1.1"; prefixLength = 24; }
-          ];
         };
       };
     };
