@@ -3,7 +3,6 @@
     ./hardware.nix
     ./network.nix
     ./storage.nix
-    ../common.nix
   ];
 
   config = {
@@ -14,7 +13,10 @@
     };
 
     laurelin = {
-      infra.canon = "10.255.1.9";
+      infra = {
+        canon = "10.255.1.9";
+        standard-packages.enable = true;
+      };
 
       netboot = {
         enable = true;
@@ -25,12 +27,7 @@
       services = {
         dns = {
           enable = true;
-          dns = {
-            zone = root.dns.zones.canon;
-          };
-          domains = {
-            "*.canon" = "ns.canon";
-          };
+          zones = root.genDNS.zones;
           interface = "enp2s0_dns";
         };
       };
@@ -47,10 +44,6 @@
           }
         ];
       };
-    };
-
-    telperion = {
-      standardPackages = true;
     };
   };
 }

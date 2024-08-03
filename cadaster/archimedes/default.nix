@@ -1,6 +1,5 @@
 { config, lib, pkgs, modulesPath, dns, laurelin, glamdring, home-manager, ... }: {
   imports = [
-    ../common.nix
     ./hardware.nix
     ./network.nix
     ./storage.nix
@@ -12,6 +11,7 @@
         canon = "10.255.1.1";
         sound.enable = true;
         standard-packages.enable = true;
+        remap-capslock.enable = true;
       };
 
       services = {

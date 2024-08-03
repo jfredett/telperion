@@ -1,6 +1,5 @@
 { config, pkgs, lib, glamdring, ... }: {
   imports = [ 
-    ../common.nix
     ./hardware.nix
     ./network.nix
     ./storage.nix
