@@ -1,4 +1,4 @@
-{ config, lib, pkgs, laurelin, ... }: {
+{ config, lib, pkgs, root, laurelin, ... }: {
   imports = [
     laurelin.nixosModules.netbootable
   ];
@@ -34,6 +34,14 @@
       netboot = {
         netbootable = true;
         mac = "02:ec:17:00:00:69";
+      };
+
+      services = {
+        dns = {
+          enable = true;
+          zones = root.genDNS.zones;
+          interface = "ens3";
+        };
       };
     };
 

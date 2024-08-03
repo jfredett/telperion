@@ -34,20 +34,23 @@
 
   outputs = inputs @ { self, nixpkgs, dns, laurelin, narya, glamdring, home-manager, nur, ... }: rec {
 
-    dns = with dns.lib.combinators; with nixpkgs.lib; let
-      configs = map (c: c.config.laurelin.infra.dns) (attrValues self.nixosConfigurations);
-      root = import ./cadaster { inherit dns; };
-      allconfs = mkMerge (configs ++ root);
+    # FIXME: This sucks, too messy.
+    genDNS = with nixpkgs.lib; let
+      mkZoneString = zone: config: toString (dns.lib.evalZone zone config);
+      # TODO: Extract this.
+      ecConf = let
+        root = import ./emerald.city/dns.nix { inherit dns; };
+        configs = map (c: c.config.laurelin.infra.dns) (attrValues self.nixosConfigTree."emerald.city");
+      in mkZoneString "emerald.city" (mkMerge (configs ++ [root]));
+      canonConf = let
+        root = import ./cadaster { inherit dns; };
+        configs = map (c: c.config.laurelin.infra.dns) (attrValues self.nixosConfigTree.canon);
+      #in mkZoneString "canon" (mkMerge (configs ++ root));
+      in mkZoneString "canon" (mkMerge (configs ++ root));
     in {
       zones = {
-        canon = toString (dns.lib.evalZone "canon" allconfs);
-      };
-      hosts = {
-        canon = ''
-          127.0.0.1 localhost
-          ::1 localhost
-          # TODO: Implement the rest of this
-        '';
+        canon = canonConf;
+        "emerald.city" = ecConf;
       };
     };
 
@@ -56,9 +59,9 @@
     nixosConfigurations = with builtins; let
       mkFlat = domain: acc: el: acc // { "${domain}.${el}" = self.nixosConfigTree."${domain}"."${el}"; };
       flatten = domain: branch: foldl' (mkFlat domain) {} (attrNames branch."${domain}");
-      cadaster = flatten "cadaster" self.nixosConfigTree;
+      canon = flatten "canon" self.nixosConfigTree;
       emerald-city = flatten "emerald.city" self.nixosConfigTree;
-    in cadaster // emerald-city;
+    in canon // emerald-city;
 
     nixosConfigTree = let
       vmConfigFor = path: nixpkgs.lib.nixosSystem {
@@ -95,11 +98,16 @@
         specialArgs = { root = self; inherit glamdring laurelin dns; };
       };
     in {
-      # TODO: wrap these in a `canon` parent and adjust appropriately. Other configs should be
-      # provided via other parents.
-        # TODO: This should be named 'canon' not 'cadaster', and I should reverse the order (hostname
-        # first) to match the DNS zone.
-      cadaster = {
+      # TODO: It might be better to do:
+      #
+      # archimedes = {
+      #   canon = configFor "archimedes";
+      #   "emerald.city" = configFor "archimedes" { additional-options };
+      # };
+      #
+      # as this would allow punning of the form `.#archimedes.canon` and
+      # `.#archimedes."emerald.city"`.
+      canon = {
         archimedes = configFor "archimedes";
         maiasaura = configFor "maiasaura";
         dragon-of-perdition = configFor "dragon-of-perdition";

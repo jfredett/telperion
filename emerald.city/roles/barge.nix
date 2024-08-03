@@ -193,7 +193,7 @@
           PUID = "1024";
           PGID = "100";
         };
-        volumes = [ 
+        volumes = [
           "/mnt/docker/emerald-city-torrent:/config:rw"
           "/mnt/Media/Downloads:/downloads:rw"
         ];
