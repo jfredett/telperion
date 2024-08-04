@@ -1,11 +1,8 @@
 { config, lib, pkgs, modulesPath, dns, root, laurelin, ... }: {
   imports = [
-     ./hardware.nix
+    # TODO: Should this be a module instead of an import?
+     ../hardware/r730.nix
      ./network.nix
-
-    # FIXME: these rely on common modules from ereshkigal, so I'll need to swap them for laurelin
-    # equivalents
-    #./storage.nix
 
     laurelin.nixosModules.netbootable
   ];
@@ -37,6 +34,8 @@
           loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
             domains = [
               (loadFromFile domains.pinky)
+              (loadFromFile domains.barge)
+              (loadFromFile domains.randy)
             ];
             networks = [
               (loadFromFile networks.ec-net)
@@ -58,12 +57,5 @@
         ];
       };
     };
-
-    environment.systemPackages = with pkgs; [
-      libvirt
-      cmake
-    ];
-
-    networking.firewall.allowedTCPPorts = [ 22 5900 ];
   };
 }

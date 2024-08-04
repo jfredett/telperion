@@ -115,8 +115,9 @@
         toto = configFor "toto";
       };
       "emerald.city" = {
-        pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
         barge = vmConfigFor ./emerald.city/roles/barge.nix;
+        pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
+        randy = vmConfigFor ./emerald.city/roles/randy.nix;
       };
     };
 
@@ -127,6 +128,7 @@
         domains = {
           barge = ./emerald.city/domains/barge.xml;
           pinky = ./emerald.city/domains/pinky.xml;
+          randy = ./emerald.city/domains/randy.xml;
         };
         networks = {
           ec-net = ./emerald.city/networks/ec-net.xml;

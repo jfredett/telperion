@@ -1,40 +1,58 @@
-{ config, lib, pkgs, modulesPath, dns, laurelin, ... }: {
+{ config, lib, pkgs, modulesPath, dns, root, laurelin, ... }: {
   imports = [
-     ./hardware.nix
-
-    # FIXME: these rely on common modules from ereshkigal, so I'll need to swap them for laurelin
-    # equivalents
-    # ./network.nix
-    #./storage.nix
-    #./config.nix
+    # TODO: Should this be a module instead of an import?
+    ../hardware/r730.nix
+    ./network.nix
+    ./storage.nix
+    laurelin.nixosModules.netbootable
   ];
 
   config = {
-    networking.hostName = "babylon-the-great";
+    environment.noXlibs = false;
 
-    laurelin.infra = {
-      canon = "10.255.1.4";
+    narya.users = {
+      passwordLogin = true;
+      jfredett = true;
+      builder = true;
     };
 
-    nix = {
-      package = pkgs.nixFlakes;
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
+    laurelin = {
+      infra = {
+        canon = "10.255.1.4";
+        standard-packages.enable = true;
+      };
+
+      netboot = {
+        netbootable = true;
+        mac = "74:86:7a:e4:0e:74";
+      };
+
+      services = {
+        vm-host = {
+          enable = true;
+          backup_path = "/mnt/vm/${config.networking.hostName}";
+          bridge_name = "ec-dmz-bridge";
+          loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
+            domains = [
+            ];
+            networks = [
+            ];
+          };
+        };
+      };
+
+      nfs = {
+        "nancy.canon" = [
+          {
+            name = "vm";
+            path = "/mnt/vm";
+            host_path = "volume1";
+            user = "root";
+            group = "root";
+            options = "defaults,hard,fg";
+          }
         ];
       };
-    };
-
-    nixpkgs.config.allowUnfree = true;
-
-    services.xserver.enable = true;
-    services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.desktopManager.lxqt.enable = true;
-
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
     };
   };
 }

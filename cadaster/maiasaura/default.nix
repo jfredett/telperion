@@ -27,6 +27,7 @@
     };
 
     narya.users = {
+      home-manager.enable = true;
       jfredett = true;
       media = true;
       builder = true;
