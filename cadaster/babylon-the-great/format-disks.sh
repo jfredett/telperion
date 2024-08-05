@@ -14,6 +14,8 @@ step() {
 }
 
 
+
+
 if zpool list storage; then
     step "Destroying existing Pool" {
       zpool destroy storage 
