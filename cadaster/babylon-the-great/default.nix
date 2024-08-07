@@ -10,8 +10,10 @@
   config = {
     environment.noXlibs = false;
 
+    telperion.infra.zfs.mode = "format";
+
     narya.users = {
-      passwordLogin = true;
+      passwordLogin = false;
       jfredett = true;
       builder = true;
     };
@@ -45,7 +47,7 @@
         "nancy.canon" = [
           {
             name = "vm";
-            path = "/mnt/vm";
+            path = "/mnt/nancy/vm";
             host_path = "volume1";
             user = "root";
             group = "root";

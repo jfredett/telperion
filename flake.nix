@@ -79,7 +79,7 @@
           path
         ];
 
-        specialArgs = { root = self; inherit glamdring laurelin dns; };
+        specialArgs = { root = self; inherit glamdring laurelin narya dns; };
       };
       configFor = name: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -95,7 +95,7 @@
           ./cadaster/${name}
         ];
 
-        specialArgs = { root = self; inherit glamdring laurelin dns; };
+        specialArgs = { root = self; inherit glamdring laurelin narya dns; };
       };
     in {
       # TODO: It might be better to do:

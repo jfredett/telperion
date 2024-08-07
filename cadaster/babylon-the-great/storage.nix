@@ -1,31 +1,22 @@
 # TODO: Move to laurelin
 # Alternate module name: "We have disko at home"
-{ config, lib, pkgs, modulesPath, ... }: with lib; let
-  allDevices = [
-    "/dev/sda"
-    "/dev/sdb"
-    "/dev/sdc"
-    "/dev/sdd"
-    "/dev/sde"
-    "/dev/sdf"
-    "/dev/sdg"
-    "/dev/sdh"
-    "/dev/nvme0n1"
-  ];
-  zfs = {
+{ config, lib, pkgs, modulesPath, narya, ... }: with lib; let
+  # TODO: Move this over to narya
+  devices = narya.infra.disks.btg; 
+  zfs = with devices.lib; {
     pools = {
       tank = {
         vdevs = [
           {
-            disks = "/dev/sda /dev/sdb /dev/sdc /dev/sdd";
+            disks = diskpathsFor [ "ssd-0" "ssd-1" "ssd-2" "ssd-3" ];
             raid = "raidz";
           }
           {
-            disks = "/dev/sde /dev/sdf /dev/sdg /dev/sdh";
+            disks = diskpathsFor [ "ssd-4" "ssd-5" "ssd-6" "ssd-7" ];
             raid = "raidz";
           }
         ];
-        cache = "/dev/nvme0n1";
+        cache = disk "nvme-0";
         options = [
           "-m none"
           "-o ashift=12"
@@ -43,6 +34,8 @@
           name = "torrent";
           settings = [
             "compression=zstd"
+            "canmount=on"
+            "mountpoint=/mnt/tank/torrent"
             "atime=off"
             "xattr=sa"
             "recordsize=16K"
@@ -53,6 +46,8 @@
           settings = [
             "compression=zstd"
             "sharenfs=on"
+            "canmount=on"
+            "mountpoint=/mnt/tank/nfs"
             "atime=off"
             "xattr=sa"
             "recordsize=128K"
@@ -63,6 +58,8 @@
           settings = [
             "compression=zstd"
             "atime=off"
+            "canmount=on"
+            "mountpoint=/mnt/tank/vm"
           ];
         }
         {
@@ -72,23 +69,26 @@
             "atime=off"
             "xattr=sa"
             "recordsize=1M"
+            "canmount=on"
+            "mountpoint=/mnt/tank/media"
           ];
         }
       ];
     };
   };
+
   poolName = "tank";
-  wipeFSCmds = foldl' (acc: d: "${acc} ${d}") "wipefs -a " allDevices;
+  wipeFSCmds = "wipefs -a ${concatStringsSep " " devices.lib.allDevices}";
   vdevs = zfs.pools.tank.vdevs;
   poolDef = with builtins; let
     first-vDev = (head vdevs);
     other-vDevs = concatStringsSep "\n" (
-      map (def: "zpool add ${poolName} ${def.raid} ${def.disks}") (tail vdevs)
-    );
-    options = concatStringsSep " " zfs.pools.tank.options;
+      map (def: "zpool add ${poolName} ${def.raid} ${concatStringsSep " " def.disks}") (tail vdevs)
+      );
+      options = concatStringsSep " " zfs.pools.tank.options;
   in ''
-    zpool create ${poolName} ${options} ${first-vDev.raid} ${first-vDev.disks}
-    ${other-vDevs}
+  zpool create ${poolName} ${options} ${first-vDev.raid} ${concatStringsSep " " first-vDev.disks}
+  ${other-vDevs}
   '';
   cacheDef = "zpool add ${poolName} cache ${zfs.pools.tank.cache}";
   poolSettings = concatStringsSep "\n" (
@@ -103,59 +103,57 @@
         concatStringsSep "\n" (
           map (setting: "zfs set ${setting} ${poolName}/${ds.name}") ds.settings
         )
-      ) datasets
-    )
-  );
-
-
-  prepareZFS = (pkgs.writeShellApplication {
-    name = "prepare-zfs";
-    runtimeInputs = with pkgs; [ coreutils ];
-    text = ''
-      set -x
-      # parse arguments
-      for arg in "$@" ; do
-        case "$arg" in
-          --force)
-            force=true
-            ;;
-          *)
-            echo "Unknown argument: $arg"
-            exit 1
-            ;;
-        esac
-      done
-      # check to see if the pool already exists and is formatted
-      if zpool list ${poolName} ; then
-        # if it does, quit
-        if ! $force ; then
-          echo "Pool ${poolName} already exists, use --force to wipe and recreate"
+        ) datasets
+      )
+    );
+    prepareZFS = (pkgs.writeShellApplication {
+      name = "prepare-zfs";
+      runtimeInputs = with pkgs; [ coreutils ];
+      text = ''
+        if zpool list ${poolName} ; then
+          echo "Pool ${poolName} already exists, destroy it and free all listed resources and try again"
           exit 1
         fi
-      fi
 
-      # Wipe the disks
-      ${wipeFSCmds}
+        set -x
 
-      # Build the pool
-      ${poolDef}
-      ${cacheDef}
+        # Wipe the disks
+        ${wipeFSCmds}
 
-      # Configure the Pool
-      ${poolSettings}
+        # Build the pool
+        ${poolDef}
+        ${cacheDef}
 
-      # Create the datasets
-      ${datasetDefs}
+        # Configure the Pool
+        ${poolSettings}
 
-      zpool status
-      zpool list tank
-    '';
-  });
+        # Create the datasets
+        ${datasetDefs}
+
+        zpool status
+        zpool list tank
+      '';
+    });
 in {
-  # A oneshot, manually-run service to run the prepare-zfs script
-  environment.systemPackages = [ prepareZFS ];
+  options.telperion.infra.zfs = {
+    mode = mkOption {
+      type = types.enum [ "format" "mount" ];
+      default = "mount";
+      description = ''
+        The mode to use for the zfs configuration, in 'format' mode, a script `prepare-zfs` is provided which will
+        format the drives and create the zfs pool, in 'mount' mode, the datasets from the specification will be mounted.
+      '';
+    };
+  };
 
+  config = let
+    cfg = config.telperion.infra.zfs;
+    mounting = cfg.mode == "mount";
+    formatting = cfg.mode == "format";
+  in {
+    # A oneshot, manually-run service to run the prepare-zfs script
+    environment.systemPackages = mkIf formatting [ prepareZFS ];
 
-  # filesystems that conditionally mount if the disks have been formatted already
-
+    boot.zfs.extraPools = mkIf mounting [ poolName ];
+  };
 }
