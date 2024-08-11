@@ -209,6 +209,8 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   narya.users = {
     jfredett = true;
   };
