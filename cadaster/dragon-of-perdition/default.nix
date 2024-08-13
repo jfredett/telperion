@@ -33,12 +33,8 @@
           bridge_name = "ec-dmz-bridge";
           loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
             domains = [
-              (loadFromFile domains.pinky)
-              (loadFromFile domains.barge)
-              (loadFromFile domains.randy)
             ];
             networks = [
-              (loadFromFile networks.ec-net)
             ];
           };
         };
