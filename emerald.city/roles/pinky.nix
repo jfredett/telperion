@@ -46,6 +46,7 @@
     };
 
     narya.users = {
+      passwordLogin = true;
       jfredett = true;
     };
   };
