@@ -151,7 +151,7 @@
         jellyfin = {
           image = "jellyfin/jellyfin";
           ports = [ "8096:8096" ];
-          volumes = [ 
+          volumes = [
             "/mnt/docker/jellyfin:/config:rw"
             "/mnt/Media:/media:rw"
           ];
@@ -241,9 +241,8 @@
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   fileSystems."/mnt/local" = {
-    device = "/dev/sda1";
+    device = "/dev/sda";
     fsType = "ext4";
-
   };
 
   narya.users = {
