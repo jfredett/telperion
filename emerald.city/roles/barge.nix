@@ -7,6 +7,9 @@
   ];
 
   config = {
+    boot.kernelModules = [ "tun" ];
+
+
     networking = {
       hostName = "barge";
       domain = "emerald.city";
@@ -137,6 +140,7 @@
       "d /mnt/local/emerald-city-torrent 0755 root users -"
       "d /mnt/docker/dashy 0755 root users -"
       "d /mnt/tmp 0755 root users -"
+      "d /mnt/local/gluetun 0755 root users -"
     ];
 
     virtualisation.containers.enable = true;
@@ -147,7 +151,34 @@
     };
     virtualisation.oci-containers = {
       backend = "podman";
-      containers = {
+      containers = narya.infra.docker.barge // {
+        gluetun = {
+          image = "qmcgaw/gluetun";
+          ports = [
+            "8888:8888"
+            "8080:8080"
+            "8081:8081"
+            "6881:6881"
+            "6881:6881/udp"
+            "6882:6882"
+            "6882:6882/udp"
+          ];
+          volumes = [ "/mnt/local/gluetun:/gluetun:rw" ];
+          extraOptions = [
+            "--cap-add=NET_ADMIN"
+            "--device=/dev/net/tun"
+          ];
+          environment = {
+            VPN_SERVICE_PROVIDER = "protonvpn";
+            VPN_TYPE = "openvpn";
+            # FIXME: turnkey, my dude.
+            OPENVPN_USER = narya.infra.vpn.protonvpn.openvpn.creds.user;
+            OPENVPN_PASSWORD = narya.infra.vpn.protonvpn.openvpn.creds.password;
+            SERVER_COUNTRIES = narya.infra.vpn.protonvpn.server-countries;
+          };
+        };
+
+
         jellyfin = {
           image = "jellyfin/jellyfin";
           ports = [ "8096:8096" ];
@@ -157,97 +188,26 @@
           ];
         };
 
-        radarr = {
-          image = "linuxserver/radarr";
-          ports = [ "7878:7878" ];
-          environment = {
-            PUID = "1024";
-            PGID = "100";
-          };
+        dashy = {
+          image = "lissy93/dashy";
+          ports = [ "8001:8080" ];
           volumes = [ 
-            "/mnt/docker/radarr:/config:rw"
-            "/mnt/Media/Movies:/movies:rw"
-            "/mnt/Media/Downloads:/downloads:rw"
+            "/mnt/docker/dashy:/app/user-data:rw"
           ];
         };
-
-        sonarr = {
-          image = "linuxserver/sonarr";
-          ports = [ "8989:8989" ];
-          environment = {
-            PUID = "1024";
-            PGID = "100";
-          };
-          volumes = [ 
-            "/mnt/docker/sonarr:/config:rw"
-            "/mnt/Media/TV:/tv:rw"
-            "/mnt/Media/Downloads:/downloads:rw"
-          ];
-        };
-
-        lidarr = {
-          image = "linuxserver/lidarr";
-          ports = [ "8686:8686" ];
-          volumes = [ 
-            "/mnt/docker/lidarr:/config:rw"
-            "/mnt/Media/Music:/music:rw"
-            "/mnt/Media/Downloads:/downloads:rw"
-          ];
-          environment = {
-            PUID = "1024";
-            PGID = "100";
-          };
-        };
-
-
-        /*
-        bazarr = {
-          image = "linuxserver/bazarr";
-          ports = [ "6767:6767" ];
-          volumes = [ 
-            "/mnt/docker/bazarr:/config:rw"
-            "/mnt/Media:/media:rw"
-          ];
-        };
-        */
-
-      # TODO: Extract to separate VM w/ ProtonVPN running on it
-      # TODO: Local Storage for torrents
-      emerald-city-torrent = {
-        image = "linuxserver/qbittorrent";
-        ports = [ "8080:8080" ];
-        environment = {
-          WEBUI_PORT = "8080";
-          PUID = "1024";
-          PGID = "100";
-        };
-        volumes = [
-          "/mnt/docker/emerald-city-torrent:/config:rw"
-          "/mnt/local/emerald-city-torrent:/downloads:rw"
-          "/mnt/Media/Downloads:/downloads-nfs:rw"
-        ];
-      };
-
-      dashy = {
-        image = "lissy93/dashy";
-        ports = [ "8001:8080" ];
-        volumes = [ 
-          "/mnt/docker/dashy:/app/user-data:rw"
-        ];
       };
     };
-  };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-  fileSystems."/mnt/local" = {
-    device = "/dev/sda";
-    fsType = "ext4";
-  };
+    fileSystems."/mnt/local" = {
+      device = "/dev/sda";
+      fsType = "ext4";
+    };
 
-  narya.users = {
-    jfredett = true;
+    narya.users = {
+      jfredett = true;
+    };
   };
-};
 }
 
