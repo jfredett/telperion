@@ -71,7 +71,10 @@
             mediaRoot = "/mnt/Media";
           };
 
-          dashy.enable = true;
+          dashy = {
+            enable = true;
+            conf = builtins.readFile ../configs/dashy.yml;
+          };
           gluetun.enable = true;
         };
       };

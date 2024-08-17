@@ -1,0 +1,61 @@
+---
+# Page meta info, like heading, footer text and nav links
+pageInfo:
+  title: Emerald.City
+  description: Off to see the wizard.
+  navLinks:
+  - title: GitHub
+    path: https://github.com/jfredett
+  - title: Dashy Docs
+    path: https://dashy.to/docs
+
+# Optional app settings and configuration
+appConfig:
+  theme: colorful
+
+# Main content - An array of sections, each containing an array of items
+sections:
+- name: Media
+  icon: fas fa-tv
+  items:
+  - title: Jellyfin
+    icon: favicon
+    url: http://jellyfin.emerald.city
+    target: newtab
+  - title: Disney+
+    url: https://www.disneyplus.com/
+    icon: favicon
+    target: newtab
+  - title: Peacock
+    url: https://www.peacocktv.com/
+    icon: favicon
+    target: newtab
+  - title: Youtube
+    url: https://www.youtube.com/
+    icon: favicon
+    target: newtab
+- name: Fileshare
+  items:
+    - title: Torrents
+      url: http://torrents.emerald.city
+      icon: fas fa-cloud-download-alt
+      target: newtab
+- name: Docs
+  items:
+  - title: Docs
+    description: Configuring & Usage Documentation
+    provider: Dashy.to
+    icon: far fa-book
+    url: https://dashy.to/docs
+  - title: Showcase
+    description: See how others are using Dashy
+    url: https://github.com/Lissy93/dashy/blob/master/docs/showcase.md
+    icon: far fa-grin-hearts
+  - title: Config Guide
+    description: See full list of configuration options
+    url: https://github.com/Lissy93/dashy/blob/master/docs/configuring.md
+    icon: fas fa-wrench
+  - title: Support
+    description: Get help with Dashy, raise a bug, or get in contact
+    url: https://github.com/Lissy93/dashy/blob/master/.github/SUPPORT.md
+    icon: far fa-hands-helping
