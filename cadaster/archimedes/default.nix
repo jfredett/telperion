@@ -42,6 +42,11 @@
             host_path = "volume1";
           }
           {
+            name = "docker-private";
+            path = "/mnt/docker-private";
+            host_path = "volume1";
+          }
+          {
             name = "docker";
             path = "/mnt/docker";
             host_path = "volume1";
