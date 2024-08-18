@@ -8,10 +8,14 @@ in {
   };
 
   subdomains = {
+    # TODO: Move this to the docker modules per container. 
     "jellyfin".CNAME = [(cname "barge.emerald.city.")];
     "dashy".CNAME = [(cname "barge.emerald.city.")];
     "torrent".CNAME = [(cname "barge.emerald.city.")];
     "sonarr".CNAME = [(cname "barge.emerald.city.")];
+    "prowlarr".CNAME = [(cname "barge.emerald.city.")];
+    "overseerr".CNAME = [(cname "barge.emerald.city.")];
+    "readarr".CNAME = [(cname "barge.emerald.city.")];
     "radarr".CNAME = [(cname "barge.emerald.city.")];
     "lidarr".CNAME = [(cname "barge.emerald.city.")];
     "bazarr".CNAME = [(cname "barge.emerald.city.")];

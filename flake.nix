@@ -57,6 +57,8 @@
     # This needs to be flat, but I want to store it in a more structured way, time to add another
     # layer.
     nixosConfigurations = with builtins; let
+      # TODO: swap el and domain below, update relevant just jobs, makes things much more readable.
+      # I don't know why I didn't do this in the first place.
       mkFlat = domain: acc: el: acc // { "${domain}.${el}" = self.nixosConfigTree."${domain}"."${el}"; };
       flatten = domain: branch: foldl' (mkFlat domain) {} (attrNames branch."${domain}");
       canon = flatten "canon" self.nixosConfigTree;

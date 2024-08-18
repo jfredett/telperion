@@ -12,6 +12,17 @@ pageInfo:
 # Optional app settings and configuration
 appConfig:
   theme: colorful
+  statusCheck: false
+  # Every 5m
+  statusCheckInterval: 300
+  websearch:
+    searchEngine: duckduckgo
+    openingMethod: sametab
+  # Config is static and located in this file
+  preventWriteToDisk: true
+  preventLocalSave: true
+  disableConfiguration: true
+
 
 # Main content - An array of sections, each containing an array of items
 sections:
@@ -19,43 +30,83 @@ sections:
   icon: fas fa-tv
   items:
   - title: Jellyfin
-    icon: favicon
+    icon: http://jellyfin.emerald.city/web/f5bbb798cb2c65908633.png
     url: http://jellyfin.emerald.city
-    target: newtab
+    target: sametab
+    statusCheck: true
   - title: Disney+
     url: https://www.disneyplus.com/
     icon: favicon
-    target: newtab
+    target: sametab
+    statusCheck: true
   - title: Peacock
     url: https://www.peacocktv.com/
     icon: favicon
-    target: newtab
+    target: sametab
+    statusCheck: true
   - title: Youtube
     url: https://www.youtube.com/
     icon: favicon
-    target: newtab
+    target: sametab
+    statusCheck: true
+  - title: Dropout
+    url: https://www.dropout.tv/
+    icon: favicon
+    target: sametab
+    statusCheck: true
+
 - name: Fileshare
   items:
+    # should only show for me
     - title: Torrents
       url: http://torrents.emerald.city
       icon: fas fa-cloud-download-alt
       target: newtab
-- name: Docs
-  items:
-  - title: Docs
-    description: Configuring & Usage Documentation
-    provider: Dashy.to
-    icon: far fa-book
-    url: https://dashy.to/docs
-  - title: Showcase
-    description: See how others are using Dashy
-    url: https://github.com/Lissy93/dashy/blob/master/docs/showcase.md
-    icon: far fa-grin-hearts
-  - title: Config Guide
-    description: See full list of configuration options
-    url: https://github.com/Lissy93/dashy/blob/master/docs/configuring.md
-    icon: fas fa-wrench
-  - title: Support
-    description: Get help with Dashy, raise a bug, or get in contact
-    url: https://github.com/Lissy93/dashy/blob/master/.github/SUPPORT.md
-    icon: far fa-hands-helping
+      statusCheck: true
+    - title: Radarr
+      url: http://radarr.emerald.city
+      icon: fas fa-film
+      target: newtab
+      statusCheck: true
+    - title: Sonarr
+      url: http://sonarr.emerald.city
+      icon: fas fa-tv
+      target: newtab
+      statusCheck: true
+    - title: Lidarr
+      url: http://lidarr.emerald.city
+      icon: fas fa-music
+      target: newtab
+      statusCheck: true
+    - title: Bazarr
+      url: http://bazarr.emerald.city
+      icon: fas fa-closed-captioning
+      target: newtab
+      statusCheck: true
+    - title: Prowlarr
+      url: http://prowlarr.emerald.city
+      icon: fas fa-search
+      target: newtab
+      statusCheck: true
+    - title: Readarr
+      url: http://readarr.emerald.city
+      icon: fas fa-book
+      target: newtab
+      statusCheck: true
+    - title: Overseerr
+      url: http://overseerr.emerald.city
+      icon: fas fa-search
+      target: newtab
+      statusCheck: true
+    # show bazarr request thing here
+- name: Widgets
+  widgets: 
+    - type: clock
+      title: Time
+      icon: far fa-clock
+      # TODO: Missing API key
+      #    - type: weather
+      #      title: Weather
+      #      icon: fas fa-cloud-sun
+      #      location: 01440
+      #    - type: calendar
