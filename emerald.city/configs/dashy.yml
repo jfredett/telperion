@@ -26,6 +26,20 @@ appConfig:
 
 # Main content - An array of sections, each containing an array of items
 sections:
+- name: Metrics and Monitoring
+  icon: fas fa-chart-line
+  items:
+    - title: Grafana
+      url: http://grafana.emerald.city
+      icon: favicon
+      target: sametab
+      statusCheck: true
+    - title: Prometheus
+      url: http://prometheus.emerald.city
+      icon: favicon
+      target: sametab
+      statusCheck: true
+
 - name: Media
   icon: fas fa-tv
   items:
@@ -59,7 +73,7 @@ sections:
   items:
     # should only show for me
     - title: Torrents
-      url: http://torrents.emerald.city
+      url: http://torrent.emerald.city
       icon: fas fa-cloud-download-alt
       target: newtab
       statusCheck: true
@@ -78,11 +92,6 @@ sections:
       icon: fas fa-music
       target: newtab
       statusCheck: true
-    - title: Bazarr
-      url: http://bazarr.emerald.city
-      icon: fas fa-closed-captioning
-      target: newtab
-      statusCheck: true
     - title: Prowlarr
       url: http://prowlarr.emerald.city
       icon: fas fa-search
@@ -93,12 +102,6 @@ sections:
       icon: fas fa-book
       target: newtab
       statusCheck: true
-    - title: Overseerr
-      url: http://overseerr.emerald.city
-      icon: fas fa-search
-      target: newtab
-      statusCheck: true
-    # show bazarr request thing here
 - name: Widgets
   widgets: 
     - type: clock

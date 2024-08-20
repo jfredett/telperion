@@ -57,9 +57,7 @@
     # This needs to be flat, but I want to store it in a more structured way, time to add another
     # layer.
     nixosConfigurations = with builtins; let
-      # TODO: swap el and domain below, update relevant just jobs, makes things much more readable.
-      # I don't know why I didn't do this in the first place.
-      mkFlat = domain: acc: el: acc // { "${domain}.${el}" = self.nixosConfigTree."${domain}"."${el}"; };
+      mkFlat = domain: acc: el: acc // { "${el}.${domain}" = self.nixosConfigTree."${domain}"."${el}"; };
       flatten = domain: branch: foldl' (mkFlat domain) {} (attrNames branch."${domain}");
       canon = flatten "canon" self.nixosConfigTree;
       emerald-city = flatten "emerald.city" self.nixosConfigTree;
@@ -120,6 +118,7 @@
         barge = vmConfigFor ./emerald.city/roles/barge.nix;
         pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
         randy = vmConfigFor ./emerald.city/roles/randy.nix;
+        daktylos = vmConfigFor ./emerald.city/roles/daktylos.nix;
       };
     };
 
@@ -131,11 +130,39 @@
           barge = ./emerald.city/domains/barge.xml;
           pinky = ./emerald.city/domains/pinky.xml;
           randy = ./emerald.city/domains/randy.xml;
+          daktylos = ./emerald.city/domains/daktylos.xml;
         };
         networks = {
           ec-net = ./emerald.city/networks/ec-net.xml;
         };
       };
     };
+
+    scrapeTargets = with builtins; let
+      isEnabled = exporter: c: c.config.laurelin.services.prometheus.exporters.${exporter}.enable;
+      scrapeClientsFor = exporter: (filter (isEnabled exporter) (attrValues self.nixosConfigurations));
+      mkScrapeConfigsFor = exporter: map (mkScrapeConfigFor exporter) (scrapeClientsFor exporter);
+      mkScrapeConfigFor = exporter: conf: let
+        hostName = conf.config.networking.hostName;
+        domain = conf.config.laurelin.services.prometheus.exporters.node.domain;
+        port = conf.config.laurelin.services.prometheus.exporters.node.port;
+      in {
+        job_name = "${hostName}-${exporter}";
+        static_configs = [
+          {
+            labels = {
+              hostname = hostName;
+            };
+            targets = [
+              "${hostName}.${domain}:${toString port}"
+            ];
+          }
+        ];
+      };
+      exporters = [
+        "node"
+        "systemd"
+      ];
+    in concatMap mkScrapeConfigsFor exporters;
   };
 }

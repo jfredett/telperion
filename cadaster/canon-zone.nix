@@ -16,5 +16,7 @@ in {
     # module
     "drac.dragon-of-perdition".A = [(a "10.255.255.1")];
     "drac.babylon-the-great".A = [(a "10.255.255.2")];
+
+    "loki".CNAME = [(cname "loki.emerald.city.")];
   };
 }

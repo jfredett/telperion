@@ -63,6 +63,15 @@
           fqdn.port = 8001;
         };
 
+        promtail = {
+          enable = true;
+          lokiUrl = "http://loki.emerald.city";
+        };
+
+        prometheus.exporters = {
+          nginx.enable = true;
+        };
+
         docker = {
           host.enable = true;
 

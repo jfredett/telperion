@@ -10,7 +10,7 @@
   config = {
     environment.noXlibs = false;
 
-    telperion.infra.zfs.mode = "format";
+    telperion.infra.zfs.mode = "mount";
 
     narya.users = {
       passwordLogin = false;
@@ -39,6 +39,7 @@
               (loadFromFile domains.pinky)
               (loadFromFile domains.barge)
               (loadFromFile domains.randy)
+              (loadFromFile domains.daktylos)
             ];
             networks = [
               (loadFromFile networks.ec-net)
@@ -52,6 +53,12 @@
                 };
                 active = true;
                 volumes = [
+                  {
+                    definition = laurelin.lib.vm.volume.writeXML {
+                      name = "daktylos_disk";
+                      capacity = { count = 250; unit = "GiB"; };
+                    };
+                  }
                   {
                     definition = laurelin.lib.vm.volume.writeXML {
                       name = "randy_disk";

@@ -3,7 +3,7 @@
   <uuid>76235e57-42d1-4a8d-b6cb-9b59540b0c1a</uuid>
   <memory unit='MiB'>32768</memory>
   <currentMemory unit='MiB'>32768</currentMemory>
-  <vcpu placement='static'>8</vcpu>
+  <vcpu placement='static'>16</vcpu>
   <os>
     <type arch='x86_64' machine='pc-i440fx-9.0'>hvm</type> 
   </os>
@@ -14,6 +14,7 @@
   </features>
   <cpu mode='custom' match='exact' check='none'>
     <model fallback='forbid'>qemu64</model>
+    <topology sockets='1' dies='1' clusters='1' cores='8' threads='2'/>
   </cpu>
   <clock offset='utc'/>
   <on_poweroff>destroy</on_poweroff>

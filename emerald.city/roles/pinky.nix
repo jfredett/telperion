@@ -42,6 +42,16 @@
           zones = root.genDNS.zones;
           interface = "ens3";
         };
+
+        prometheus.exporters = {
+          node = {
+            enable = true;
+          };
+
+          systemd = {
+            enable = true;
+          };
+        };
       };
     };
 

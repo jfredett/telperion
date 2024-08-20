@@ -39,6 +39,7 @@
         mac = "02:ec:17:00:00:22";
       };
 
+      /*
       services = {
         _1password = {
           enable = true;
@@ -49,6 +50,7 @@
           manager = "kde";
         };
       };
+      */
 
       nfs = {
         "nancy.canon" = [
@@ -77,7 +79,7 @@
     };
 
     narya.users = {
-      home-manager.enable = true;
+      home-manager.enable = false;
       jfredett = true;
     };
 
