@@ -27,6 +27,20 @@
           enable = true;
           manager = "lxqt";
         };
+        promtail = {
+          enable = true;
+          lokiUrl = "http://loki.emerald.city";
+        };
+        prometheus.exporters = {
+          node = {
+            enable = true;
+            domain = "canon";
+          };
+          systemd = {
+            enable = true;
+            domain = "canon";
+          };
+        };
       };
 
       nfs = {
@@ -59,6 +73,7 @@
         ];
       };
     };
+
 
     narya.users = {
       home-manager.enable = true;

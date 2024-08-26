@@ -30,6 +30,21 @@
           zones = root.genDNS.zones;
           interface = "enp2s0_dns";
         };
+
+        promtail = {
+          enable = true;
+          lokiUrl = "http://loki.emerald.city";
+        };
+        prometheus.exporters = {
+          node = {
+            enable = true;
+            domain = "canon";
+          };
+          systemd = {
+            enable = true;
+            domain = "canon";
+          };
+        };
       };
 
       nfs = {

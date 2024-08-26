@@ -30,6 +30,21 @@
       };
 
       services = {
+        promtail = {
+          enable = true;
+          lokiUrl = "http://loki.emerald.city";
+        };
+        prometheus.exporters = {
+          node = {
+            enable = true;
+            domain = "canon";
+          };
+          systemd = {
+            enable = true;
+            domain = "canon";
+          };
+        };
+
         vm-host = {
           enable = true;
           backup_path = "/mnt/vm/${config.networking.hostName}";
