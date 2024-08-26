@@ -65,8 +65,29 @@
           };
         };
 
-        prometheus = {
+        grafana = {
+          enable = true;
+          domain = "emerald.city";
+          dashboards = with laurelin.lib; let
+            dashFor = host: id: (mkDashboard {
+              templateName = "system-view-template";
+              dashboardName = "system-view-${host}";
+              args = {
+                inherit id;
+                hostname = "${host}";
+              };
+            });
+          in [
+            (dashFor "barge" 1)
+            (dashFor "daktylos" 2)
+            (dashFor "archimedes" 3)
+            (dashFor "babylon-the-great" 4)
+            (dashFor "dragon-of-perdition" 5)
+            (dashFor "maiasaura" 6)
+          ];
+        };
 
+        prometheus = {
           host = {
             enable = true;
             scrapeConfigs = root.scrapeTargets ++ [
@@ -85,11 +106,10 @@
               }
             ];
           };
-
           exporters = {
-
             node = {
               enable = true;
+              # TODO: Extract defaultDomain somehow?
               domain = "emerald.city";
             };
 
@@ -122,32 +142,45 @@
         configFile = ../configs/loki.yml;
       };
 
+      /*
       grafana = {
         enable = true;
-        settings.server = {
-          domain = "grafana.emerald.city";
-          port = 3000;
-          addr = "127.0.0.1";
+        settings = {
+
+          server = {
+            domain = "grafana.emerald.city";
+            port = 3000;
+            addr = "127.0.0.1";
+          };
+
+        };
+
+        provision = {
+          datasources.settings = {
+            apiVersion = 1;
+
+            datasources = [
+              {
+                name = "loki";
+                type = "loki";
+                url = "http://loki.emerald.city";
+              }
+              {
+                name = "prometheus";
+                type = "prometheus";
+                url = "http://prometheus.emerald.city";
+              }
+            ];
+
+            deleteDatasources = [
+              { name = "loki"; orgId = 1; }
+              { name = "prometheus"; orgId = 1; }
+            ];
+          };
         };
       };
-
-
+      */
     };
-
-
-    # NOTE: The builtin package is very strange with respect to it's configuration, so I'm just
-    # going to do things by hand.
-    /*
-    systemd.services.promtail = {
-      description = "Promtail";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Restart = "on-failure";
-        TimeoutStopSec = 10;
-        ExecStart = "${pkgs.grafana-loki}/bin/promtail -config.file=${../configs/promtail.yml}";
-      };
-    };
-    */
 
     # Alertmanager
     #   - Maybe with the webhook thing?
