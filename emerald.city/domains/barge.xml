@@ -1,8 +1,8 @@
 <domain type='kvm'>
   <name>barge</name>
   <uuid>76235e57-42d1-4a8d-b6cb-9b59540b0c1a</uuid>
-  <memory unit='MiB'>32768</memory>
-  <currentMemory unit='MiB'>32768</currentMemory>
+  <memory unit='MiB'>16384</memory>
+  <currentMemory unit='MiB'>16384</currentMemory>
   <vcpu placement='static'>16</vcpu>
   <os>
     <type arch='x86_64' machine='pc-i440fx-9.0'>hvm</type> 

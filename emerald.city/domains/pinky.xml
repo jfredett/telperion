@@ -23,7 +23,7 @@
   <devices>
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
     <disk type="file" device="disk">
-      <driver name="qemu" type="raw"/>
+      <driver name="qemu" type="raw" cache="none" io="native" discard="unmap"/>
       <source file="/mnt/tank/vm/pinky_test"/>
       <target dev="hda" bus="ide"/>
       <address type="drive" controller="0" bus="0" target="0" unit="0"/>
