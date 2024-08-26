@@ -17,7 +17,7 @@ appConfig:
   statusCheckInterval: 300
   websearch:
     searchEngine: duckduckgo
-    openingMethod: sametab
+    openingMethod: newtab
   # Config is static and located in this file
   preventWriteToDisk: true
   preventLocalSave: true
@@ -32,12 +32,12 @@ sections:
     - title: Grafana
       url: http://grafana.emerald.city
       icon: favicon
-      target: sametab
+      target: newtab
       statusCheck: true
     - title: Prometheus
       url: http://prometheus.emerald.city
       icon: favicon
-      target: sametab
+      target: newtab
       statusCheck: true
 
 - name: Media
@@ -46,27 +46,27 @@ sections:
   - title: Jellyfin
     icon: http://jellyfin.emerald.city/web/f5bbb798cb2c65908633.png
     url: http://jellyfin.emerald.city
-    target: sametab
+    target: newtab
     statusCheck: true
   - title: Disney+
     url: https://www.disneyplus.com/
     icon: favicon
-    target: sametab
+    target: newtab
     statusCheck: true
   - title: Peacock
     url: https://www.peacocktv.com/
     icon: favicon
-    target: sametab
+    target: newtab
     statusCheck: true
   - title: Youtube
     url: https://www.youtube.com/
     icon: favicon
-    target: sametab
+    target: newtab
     statusCheck: true
   - title: Dropout
     url: https://www.dropout.tv/
     icon: favicon
-    target: sametab
+    target: newtab
     statusCheck: true
 
 - name: Fileshare
