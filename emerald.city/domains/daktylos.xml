@@ -1,8 +1,8 @@
 <domain type='kvm'>
   <name>daktylos</name>
   <uuid>76235e57-42d1-4a8d-b6cb-000000000000</uuid>
-  <memory unit='MiB'>32768</memory>
-  <currentMemory unit='MiB'>32768</currentMemory>
+  <memory unit='MiB'>8192</memory>
+  <currentMemory unit='MiB'>8192</currentMemory>
   <vcpu placement='static'>8</vcpu>
   <os>
     <type arch='x86_64' machine='pc-i440fx-9.0'>hvm</type> 
