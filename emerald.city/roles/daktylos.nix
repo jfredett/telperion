@@ -84,6 +84,7 @@
             (dashFor "babylon-the-great" 4)
             (dashFor "dragon-of-perdition" 5)
             (dashFor "maiasaura" 6)
+            (dashFor "toto" 7)
           ];
         };
 
