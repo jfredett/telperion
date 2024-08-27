@@ -6,6 +6,10 @@ pageInfo:
   navLinks:
   - title: GitHub
     path: https://github.com/jfredett
+  - title: NixVim Options
+    path: https://nix-community.github.io/nixvim/search/
+  - title: NixOS Options
+    path: https://search.nixos.org/options
   - title: Dashy Docs
     path: https://dashy.to/docs
 
@@ -34,6 +38,10 @@ sections:
       icon: favicon
       target: newtab
       statusCheck: true
+    - title: Unified `systemd-journal`s
+      icon: fas fa-clipboard-list
+      target: newtab
+      url: http://grafana.emerald.city/explore?schemaVersion=1&panes=%7B%22ymt%22:%7B%22datasource%22:%22--%20Mixed%20--%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7Bjob%3D%5C%22systemd-journal%5C%22%7D%20%7C%20json%20%21%3D%20%60_SOURCE_REALTIME_TIMESTAMP%60%20%7C%20line_format%20%60%7B%7B__timestamp__%20%7C%20date%20%5C%2202%20Jan%2006%2015:04%20MST%5C%22%7D%7D%20%7C%20%7B%7BalighRight%2020%20.host%7D%7D%20%20%7C%20%7B%7BalignLeft%206%20.detected_level%7D%7D%20%7C%20%7B%7B.MESSAGE%7D%7D%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P982945308D3682D1%22%7D,%22editorMode%22:%22code%22%7D,%7B%22refId%22:%22B%22,%22expr%22:%22%20%7Bjob%3D%5C%22systemd-journal%5C%22%7D%20%7C%20json%20%7C%20label_format%20timestamp%3D_SOURCE_REALTIME_TIMESTAMP%20%7C%20timestamp%20%21%3D%20%60%60%20%7C%20line_format%20%60%7B%7B.timestamp%20%7C%20unixToTime%20%7C%20date%20%5C%2202%20Jan%2006%2015:04%20MST%5C%22%20%7D%7D%20%7C%20%7B%7BalignRight%2020%20.host%7D%7D%20%7C%20%7B%7BalignLeft%208%20.detected_level%7D%7D%20%7C%20%7B%7B.MESSAGE%7D%7D%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P982945308D3682D1%22%7D,%22editorMode%22:%22code%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D%7D&orgId=1
     - title: Prometheus
       url: http://prometheus.emerald.city
       icon: favicon
