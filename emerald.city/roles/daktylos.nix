@@ -134,53 +134,12 @@
       fsType = "ext4";
     };
 
-
     # Prometheus
     services = {
-
       loki = {
         enable = true;
         configFile = ../configs/loki.yml;
       };
-
-      /*
-      grafana = {
-        enable = true;
-        settings = {
-
-          server = {
-            domain = "grafana.emerald.city";
-            port = 3000;
-            addr = "127.0.0.1";
-          };
-
-        };
-
-        provision = {
-          datasources.settings = {
-            apiVersion = 1;
-
-            datasources = [
-              {
-                name = "loki";
-                type = "loki";
-                url = "http://loki.emerald.city";
-              }
-              {
-                name = "prometheus";
-                type = "prometheus";
-                url = "http://prometheus.emerald.city";
-              }
-            ];
-
-            deleteDatasources = [
-              { name = "loki"; orgId = 1; }
-              { name = "prometheus"; orgId = 1; }
-            ];
-          };
-        };
-      };
-      */
     };
 
     # Alertmanager

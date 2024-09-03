@@ -160,8 +160,14 @@
         ];
       };
       exporters = [
+#        "domain"
+#        "idrac"
+        "ipmi"
+        "nginx"
         "node"
+#        "script"
         "systemd"
+#        "zfs"
       ];
     in concatMap mkScrapeConfigsFor exporters;
   };
