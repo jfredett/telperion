@@ -20,7 +20,7 @@
         ipv4 = {
           addresses = [{
             address = "10.255.1.1";
-            prefixLength = 24;
+            prefixLength = 16;
           }];
         };
       };
