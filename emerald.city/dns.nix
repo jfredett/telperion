@@ -21,6 +21,7 @@ in {
     "radarr".CNAME = [(cname "barge.emerald.city.")];
     "lidarr".CNAME = [(cname "barge.emerald.city.")];
     "bazarr".CNAME = [(cname "barge.emerald.city.")];
+    "grocy".CNAME = [(cname "barge.emerald.city.")];
 
 
     "grafana".CNAME = [(cname "daktylos.emerald.city.")];

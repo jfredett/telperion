@@ -110,6 +110,14 @@ sections:
       icon: fas fa-book
       target: newtab
       statusCheck: true
+- name: Organization
+  items:
+    - title: Grocy
+      url: http://grocy.emerald.city
+      icon: fas fa-utensils
+      target: newtab
+      statusCheck: true
+
 - name: Widgets
   widgets: 
     - type: clock

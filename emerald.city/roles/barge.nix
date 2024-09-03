@@ -84,6 +84,12 @@
             enable = true;
             conf = builtins.readFile ../configs/dashy.yml;
           };
+
+          grocy = {
+            enable = true;
+            configRoot = "/mnt/local";
+          };
+
           gluetun.enable = true;
         };
       };
