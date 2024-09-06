@@ -23,6 +23,7 @@
           enable = true;
           manager = "hyprland";
         };
+#        rustdesk.client.enable = true;
       };
 
       nfs = {
@@ -52,7 +53,14 @@
     };
 
     narya.users = {
-      home-manager.enable = false;
+      home-manager = {
+        enable = true;
+        # FIXME: To be clear, this is evil magic. I'm sorry. I don't want to have hyprland enabled
+        # everywhere just yet.
+        extraConfig = {
+          glamdring.hyprland.enable = true;
+        };
+      };
       jfredett = true;
     };
   };

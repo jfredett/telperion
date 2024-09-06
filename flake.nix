@@ -75,6 +75,7 @@
           # FIXME: I don't think these two things should be here, they should be behind
           # laurelin/narya at least, ideally behind glamdring.
           home-manager.nixosModules.home-manager
+          { home-manager.backupFileExtension = "backup"; }
           nur.nixosModules.nur
           path
         ];

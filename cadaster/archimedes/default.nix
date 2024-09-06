@@ -25,7 +25,10 @@
         };
         window-manager = {
           enable = true;
-          manager = "lxqt";
+          manager = "hyprland";
+          hyprland = {
+            gpu = "nvidia";
+          };
         };
         promtail = {
           enable = true;
@@ -76,7 +79,14 @@
 
 
     narya.users = {
-      home-manager.enable = true;
+      home-manager = {
+        enable = true;
+        extraConfig = {
+          # FIXME: To be clear, this is evil magic. I'm sorry. I don't want to have hyprland enabled
+          # everywhere just yet.
+          glamdring.hyprland.enable = true;
+        };
+      };
       jfredett = true;
       builder = true;
     };
