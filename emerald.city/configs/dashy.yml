@@ -21,7 +21,7 @@ appConfig:
   statusCheckInterval: 300
   websearch:
     searchEngine: duckduckgo
-    openingMethod: newtab
+    openingMethod: sametab
   # Config is static and located in this file
   preventWriteToDisk: true
   preventLocalSave: true
@@ -36,17 +36,17 @@ sections:
     - title: Grafana
       url: http://grafana.emerald.city
       icon: favicon
-      target: newtab
+      target: sametab
       statusCheck: true
-    - title: Unified `systemd-journal`s
-      icon: fas fa-clipboard-list
-      target: newtab
-      url: http://grafana.emerald.city/explore?schemaVersion=1&panes=%7B%22ymt%22:%7B%22datasource%22:%22--%20Mixed%20--%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7Bjob%3D%5C%22systemd-journal%5C%22%7D%20%7C%20json%20%21%3D%20%60_SOURCE_REALTIME_TIMESTAMP%60%20%7C%20line_format%20%60%7B%7B__timestamp__%20%7C%20date%20%5C%2202%20Jan%2006%2015:04%20MST%5C%22%7D%7D%20%7C%20%7B%7BalighRight%2020%20.host%7D%7D%20%20%7C%20%7B%7BalignLeft%206%20.detected_level%7D%7D%20%7C%20%7B%7B.MESSAGE%7D%7D%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P982945308D3682D1%22%7D,%22editorMode%22:%22code%22%7D,%7B%22refId%22:%22B%22,%22expr%22:%22%20%7Bjob%3D%5C%22systemd-journal%5C%22%7D%20%7C%20json%20%7C%20label_format%20timestamp%3D_SOURCE_REALTIME_TIMESTAMP%20%7C%20timestamp%20%21%3D%20%60%60%20%7C%20line_format%20%60%7B%7B.timestamp%20%7C%20unixToTime%20%7C%20date%20%5C%2202%20Jan%2006%2015:04%20MST%5C%22%20%7D%7D%20%7C%20%7B%7BalignRight%2020%20.host%7D%7D%20%7C%20%7B%7BalignLeft%208%20.detected_level%7D%7D%20%7C%20%7B%7B.MESSAGE%7D%7D%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P982945308D3682D1%22%7D,%22editorMode%22:%22code%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D%7D&orgId=1
     - title: Prometheus
       url: http://prometheus.emerald.city
       icon: favicon
-      target: newtab
+      target: sametab
       statusCheck: true
+    - title: Unified `systemd-journal`s
+      icon: fas fa-clipboard-list
+      target: sametab
+      url: http://grafana.emerald.city/explore?schemaVersion=1&panes=%7B%22ymt%22:%7B%22datasource%22:%22--%20Mixed%20--%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7Bjob%3D%5C%22systemd-journal%5C%22%7D%20%7C%20json%20%21%3D%20%60_SOURCE_REALTIME_TIMESTAMP%60%20%7C%20line_format%20%60%7B%7B__timestamp__%20%7C%20date%20%5C%2202%20Jan%2006%2015:04%20MST%5C%22%7D%7D%20%7C%20%7B%7BalighRight%2020%20.host%7D%7D%20%20%7C%20%7B%7BalignLeft%206%20.detected_level%7D%7D%20%7C%20%7B%7B.MESSAGE%7D%7D%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P982945308D3682D1%22%7D,%22editorMode%22:%22code%22%7D,%7B%22refId%22:%22B%22,%22expr%22:%22%20%7Bjob%3D%5C%22systemd-journal%5C%22%7D%20%7C%20json%20%7C%20label_format%20timestamp%3D_SOURCE_REALTIME_TIMESTAMP%20%7C%20timestamp%20%21%3D%20%60%60%20%7C%20line_format%20%60%7B%7B.timestamp%20%7C%20unixToTime%20%7C%20date%20%5C%2202%20Jan%2006%2015:04%20MST%5C%22%20%7D%7D%20%7C%20%7B%7BalignRight%2020%20.host%7D%7D%20%7C%20%7B%7BalignLeft%208%20.detected_level%7D%7D%20%7C%20%7B%7B.MESSAGE%7D%7D%60%22,%22queryType%22:%22range%22,%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22P982945308D3682D1%22%7D,%22editorMode%22:%22code%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D%7D&orgId=1
 
 - name: Media
   icon: fas fa-tv
@@ -54,72 +54,105 @@ sections:
   - title: Jellyfin
     icon: http://jellyfin.emerald.city/web/f5bbb798cb2c65908633.png
     url: http://jellyfin.emerald.city
-    target: newtab
+    target: sametab
     statusCheck: true
   - title: Disney+
     url: https://www.disneyplus.com/
     icon: favicon
-    target: newtab
+    target: sametab
     statusCheck: true
   - title: Peacock
     url: https://www.peacocktv.com/
     icon: favicon
-    target: newtab
+    target: sametab
     statusCheck: true
   - title: Youtube
     url: https://www.youtube.com/
     icon: favicon
-    target: newtab
+    target: sametab
     statusCheck: true
   - title: Dropout
     url: https://www.dropout.tv/
     icon: favicon
-    target: newtab
+    target: sametab
     statusCheck: true
 
-- name: Fileshare
+- name: Social Media
+  items:
+    - title: Reddit
+      url: https://old.reddit.com/
+      icon: favicon
+      target: sametab
+      statusCheck: true
+    - title: Hachyderm.io
+      url: https://hachyderm.io/
+      icon: favicon
+      target: sametab
+      statusCheck: true
+
+- name: Games
+  items:
+    - title: Lichess.org
+      url: https://lichess.org/
+      icon: favicon
+      target: sametab
+      statusCheck: true
+    - title: iRacing Week Planner
+      url: https://iracing-week-planner.tmo.lol/
+      icon: favicon
+      target: sametab
+      statusCheck: true
+    - title: VRS
+      url: https://virtualracingschool.appspot.com/#/Home
+      icon: favicon
+      target: sametab
+      statusCheck: true
+
+- name: Files
+  defaultOpen: false
   items:
     # should only show for me
     - title: Torrents
       url: http://torrent.emerald.city
       icon: fas fa-cloud-download-alt
-      target: newtab
+      target: sametab
       statusCheck: true
     - title: Radarr
       url: http://radarr.emerald.city
       icon: fas fa-film
-      target: newtab
+      target: sametab
       statusCheck: true
     - title: Sonarr
       url: http://sonarr.emerald.city
       icon: fas fa-tv
-      target: newtab
+      target: sametab
       statusCheck: true
     - title: Lidarr
       url: http://lidarr.emerald.city
       icon: fas fa-music
-      target: newtab
+      target: sametab
       statusCheck: true
     - title: Prowlarr
       url: http://prowlarr.emerald.city
       icon: fas fa-search
-      target: newtab
+      target: sametab
       statusCheck: true
     - title: Readarr
       url: http://readarr.emerald.city
       icon: fas fa-book
-      target: newtab
+      target: sametab
       statusCheck: true
+
 - name: Organization
   items:
     - title: Grocy
       url: http://grocy.emerald.city
       icon: fas fa-utensils
-      target: newtab
+      target: sametab
       statusCheck: true
 
 - name: Widgets
-  widgets: 
+  widgets:
     - type: clock
       title: Time
       icon: far fa-clock
