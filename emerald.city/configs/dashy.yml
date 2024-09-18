@@ -60,22 +60,29 @@ sections:
     url: https://www.disneyplus.com/
     icon: favicon
     target: sametab
-    statusCheck: true
   - title: Peacock
     url: https://www.peacocktv.com/
     icon: favicon
     target: sametab
-    statusCheck: true
   - title: Youtube
     url: https://www.youtube.com/
     icon: favicon
     target: sametab
-    statusCheck: true
   - title: Dropout
     url: https://www.dropout.tv/
     icon: favicon
     target: sametab
-    statusCheck: true
+
+- name: Music
+  items:
+    - title: Reverb
+      url: https://reverb.com/
+      icon: favicon
+      target: sametab
+    - title: Modular Grid
+      url: https://modulargrid.net/e/modules/home
+      icon: favicon
+      target: sametab
 
 - name: Social Media
   items:
@@ -83,12 +90,14 @@ sections:
       url: https://old.reddit.com/
       icon: favicon
       target: sametab
-      statusCheck: true
     - title: Hachyderm.io
       url: https://hachyderm.io/
       icon: favicon
       target: sametab
-      statusCheck: true
+    - title: Instagram
+      url: https://www.instagram.com/
+      icon: favicon
+      target: sametab
 
 - name: Games
   items:
@@ -96,17 +105,18 @@ sections:
       url: https://lichess.org/
       icon: favicon
       target: sametab
-      statusCheck: true
+    - title: Chessable
+      url: https://www.chessable.com/
+      icon: favicon
+      target: sametab
     - title: iRacing Week Planner
       url: https://iracing-week-planner.tmo.lol/
       icon: favicon
       target: sametab
-      statusCheck: true
     - title: VRS
       url: https://virtualracingschool.appspot.com/#/Home
       icon: favicon
       target: sametab
-      statusCheck: true
 
 - name: Files
   defaultOpen: false
@@ -142,6 +152,11 @@ sections:
       icon: fas fa-book
       target: sametab
       statusCheck: true
+    - title: Nancy NAS
+      url: http://nancy.canon:5000/#/signin
+      icon: fas fa-hdd
+      target: sametab
+      statusCheck: true
 
 - name: Organization
   items:
@@ -150,6 +165,10 @@ sections:
       icon: fas fa-utensils
       target: sametab
       statusCheck: true
+    - title: YNAB
+      url: https://app.youneedabudget.com/
+      icon: favicon
+      target: sametab
 
 - name: Widgets
   widgets:
@@ -162,3 +181,25 @@ sections:
       #      icon: fas fa-cloud-sun
       #      location: 01440
       #    - type: calendar
+      #
+    - type: github-profile-stats
+      options:
+        username: jfredett
+        hideLanguagesCard: true
+        repos:
+          - jfredett/minas-tarwon
+          - jfredett/brocard
+          - jfredett/hazel
+    - type: public-holidays
+      options:
+        country: US
+        region: BOS
+        holidayType: all
+        monthsToShow: 12
+        lang: en
+    - type: gluetun-status
+      useProxy: true
+      options:
+        hostname: http://localhost:8000
+        visibleFields: public_ip,region,country,city,location,organisation,postal_code,timezone
+    - type: cve-vulnerabilitiest
