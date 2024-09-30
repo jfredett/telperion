@@ -2,6 +2,7 @@
   imports = [
     # TODO: Should this be a module instead of an import?
     ../hardware/r730.nix
+    ../hardware/nvidia/p40.nix
     ./network.nix
     ./storage.nix
     laurelin.nixosModules.netbootable

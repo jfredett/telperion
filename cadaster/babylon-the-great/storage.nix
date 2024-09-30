@@ -38,6 +38,8 @@
             "mountpoint=/mnt/tank/torrent"
             "atime=off"
             "xattr=sa"
+            # TODO: This should be 1M or more, apparently. I can build a new dataset and migrate to
+            # it.
             "recordsize=16K"
           ];
         }
