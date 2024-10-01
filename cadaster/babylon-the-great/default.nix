@@ -9,7 +9,6 @@
   ];
 
   config = {
-    environment.noXlibs = false;
 
     telperion.infra.zfs.mode = "mount";
 

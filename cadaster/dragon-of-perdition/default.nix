@@ -8,8 +8,6 @@
   ];
 
   config = {
-    environment.noXlibs = false;
-
     narya.users = {
       jfredett = true;
       builder = true;
