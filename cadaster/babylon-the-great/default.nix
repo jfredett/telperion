@@ -8,7 +8,31 @@
     laurelin.nixosModules.netbootable
   ];
 
-  config = {
+  config = let
+    # TODO: This should probably live in the hardware def somehow
+    p40id = "10de:1b38";
+  in {
+    # set up iommu and gpu passthrough
+    boot.kernelParams = [ "intel_iommu=on" "iommu=pt" "rd.driver.pre=vfio-pci" ];
+    boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
+    boot.kernelModules = [ 
+      "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" 
+      "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"
+    ];
+
+    boot.extraModprobeConfig = ''
+      options vfio-pci ids=${p40id}
+    '';
+
+    boot.postBootCommands = /* bash */ ''
+      DEVS="${p40id}"
+
+      for DEV in $DEVS; do
+        echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+      done
+
+      modprobe -i vfio-pci
+      '';
 
     telperion.infra.zfs.mode = "mount";
 
@@ -61,11 +85,11 @@
             ];
             pools = [
               { definition = laurelin.lib.vm.pool.writeXML {
-                  name = "vm-pool";
-                  uuid = "e6d4eb84-e0e0-4ac8-89b4-f2bd1379af8e";
-                  type = "dir";
-                  target = { path = "/mnt/tank/vm"; };
-                };
+                name = "vm-pool";
+                uuid = "e6d4eb84-e0e0-4ac8-89b4-f2bd1379af8e";
+                type = "dir";
+                target = { path = "/mnt/tank/vm"; };
+              };
                 active = true;
                 volumes = [
                   {
