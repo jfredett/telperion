@@ -35,6 +35,7 @@
           enable = true;
           lokiUrl = "http://loki.emerald.city";
         };
+
         prometheus.exporters = {
           node = {
             enable = true;

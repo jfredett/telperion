@@ -38,8 +38,11 @@
 
     narya.users = {
       passwordLogin = false;
-      jfredett = true;
-      builder = true;
+      jfredett = {
+        enable = true;
+        mode = "dragon";
+      };
+      builder.enable = true;
     };
 
     laurelin = {

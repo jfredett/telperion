@@ -81,14 +81,14 @@
     narya.users = {
       home-manager = {
         enable = true;
-        extraConfig = {
-          # FIXME: To be clear, this is evil magic. I'm sorry. I don't want to have hyprland enabled
-          # everywhere just yet.
-          glamdring.hyprland.enable = true;
-        };
       };
-      jfredett = true;
-      builder = true;
+
+      jfredett = {
+        enable = true;
+        mode = "standard";
+      };
+
+      builder.enable = true;
     };
   };
 }

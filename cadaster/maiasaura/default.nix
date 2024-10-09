@@ -42,19 +42,15 @@
 
     narya.users = {
       home-manager.enable = true;
-      jfredett = true;
-      media = true;
-      builder = true;
+      jfredett = {
+        enable = true;
+        mode = "standard";
+      };
+      media = {
+        enable = true;
+        mode = "media";
+      };
+      builder.enable = true;
     };
-
-    # TODO: move this into the users module in narya.
-    home-manager = {
-      backupFileExtension = "backup";
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      users.media = glamdring.homeConfigurations.media;
-      users.jfredett = glamdring.homeConfigurations.jfredett;
-    };
-
   };
 }

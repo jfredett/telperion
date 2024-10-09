@@ -1,18 +1,14 @@
-{ config, lib, pkgs, modulesPath, dns, root, laurelin, ... }: {
+{ config, root, laurelin, ... }: {
   imports = [
     # TODO: Should this be a module instead of an import?
-     ../hardware/r730.nix
-     ./network.nix
+    ../hardware/r730.nix
+    ./network.nix
+    ./storage.nix
 
     laurelin.nixosModules.netbootable
   ];
 
   config = {
-    narya.users = {
-      jfredett = true;
-      builder = true;
-    };
-
     laurelin = {
       infra = {
         canon = "10.255.1.3";
@@ -65,6 +61,16 @@
           }
         ];
       };
+    };
+
+    narya.users = {
+      home-manager.enable = true;
+
+      jfredett = {
+        enable = true;
+        mode = "dragon";
+      };
+      builder.enable = true;
     };
   };
 }
