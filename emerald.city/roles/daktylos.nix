@@ -125,8 +125,11 @@
       };
     };
 
-    narya = {
-      users.jfredett = true;
+
+    narya.users = {
+      jfredett = {
+        enable = true;
+      };
     };
 
     fileSystems."/mnt/local" = {

@@ -7,9 +7,8 @@
 
   config = {
     narya.users = {
-      jfredett = true;
-      builder = true;
-      media = false;
+      jfredett.enable = true;
+      builder.enable = true;
     };
 
     laurelin = {

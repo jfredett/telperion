@@ -103,7 +103,11 @@
         };
       };
 
-      users.jfredett = true;
+      users = {
+        jfredett = {
+          enable = true;
+        };
+      };
     };
 
     fileSystems."/mnt/local" = {
