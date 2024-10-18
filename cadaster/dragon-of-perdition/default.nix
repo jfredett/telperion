@@ -12,7 +12,7 @@
     laurelin = {
       infra = {
         canon = "10.255.1.3";
-        standard-packages.enable = true;
+        standard-packages.enable = false;
       };
 
       netboot = {
@@ -36,8 +36,9 @@
           };
         };
 
+        /*
         vm-host = {
-          enable = true;
+          enable = false;
           backup_path = "/mnt/vm/${config.networking.hostName}";
           bridge_name = "ec-dmz-bridge";
           loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
@@ -47,8 +48,10 @@
             ];
           };
         };
+        */
       };
 
+      /*
       nfs = {
         "nancy.canon" = [
           {
@@ -61,6 +64,7 @@
           }
         ];
       };
+      */
     };
 
     narya.users = {
