@@ -23,7 +23,7 @@
           enable = true;
           manager = "hyprland";
         };
-#        rustdesk.client.enable = true;
+        rustdesk.client.enable = true;
       };
 
       nfs = {
@@ -54,7 +54,10 @@
 
     narya.users = {
       home-manager.enable = true;
-      jfredett.enable = true;
+      jfredett = {
+        enable = true;
+        mode = "standard";
+      };
     };
   };
 }
