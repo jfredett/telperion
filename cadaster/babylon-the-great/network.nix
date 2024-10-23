@@ -12,7 +12,7 @@ in {
     };
 
     firewall = {
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [ 22 5903 ];
     };
 
     vlans = {

@@ -21,7 +21,7 @@
         };
         window-manager = {
           enable = true;
-          manager = "hyprland";
+          manager = "kde";
         };
         rustdesk.client.enable = true;
       };

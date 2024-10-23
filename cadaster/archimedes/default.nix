@@ -25,10 +25,12 @@
         };
         window-manager = {
           enable = true;
-          manager = "hyprland";
+          manager = "kde";
+          /*
           hyprland = {
             gpu = "nvidia";
           };
+          */
         };
         promtail = {
           enable = true;
