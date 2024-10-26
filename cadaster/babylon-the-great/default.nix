@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, dns, root, laurelin, ... }: {
+{ config, lib, pkgs, modulesPath, dns, root, laurelin, nvidia-vgpu, ... }: {
   imports = [
     # TODO: Should this be a module instead of an import?
     ../hardware/r730.nix
@@ -15,8 +15,8 @@
     # set up iommu and gpu passthrough
     boot.kernelParams = [ "intel_iommu=on" "iommu=pt" "rd.driver.pre=vfio-pci" ];
     boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
-    boot.kernelModules = [ 
-      "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" 
+    boot.kernelModules = [
+      "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio"
       "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"
     ];
 
@@ -32,7 +32,15 @@
       done
 
       modprobe -i vfio-pci
-      '';
+    '';
+
+    # programs.mdevctl.enable = true;
+    # hardware.nvidia.vgpu.enable = true; # Enable NVIDIA KVM vGPU + GRID driver
+    # hardware.nvidia.vgpu.unlock.enable = true; # Unlock vGPU functionality on consumer cards using DualCoder/vgpu_unlock project.
+
+    # environment.systemPackages = with pkgs; [
+    #   mdevctl
+    # ];
 
     telperion.infra.zfs.mode = "mount";
 

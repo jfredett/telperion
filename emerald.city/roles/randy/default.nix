@@ -23,8 +23,8 @@
           enable = true;
           manager = "kde";
         };
-        rustdesk.client.enable = true;
       };
+
 
       nfs = {
         "nancy.canon" = [
