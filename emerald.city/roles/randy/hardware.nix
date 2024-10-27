@@ -1,7 +1,9 @@
 { config, lib, pkgs, root, laurelin, modulesPath, ... }: {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "sd_mod" 
+      "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"
+  ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = [];
   boot.extraModulePackages = [];
@@ -25,7 +27,7 @@
   hardware.graphics = {
     enable = true;
   };
-
+ 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
@@ -36,16 +38,25 @@
   systemd.services."vnc-server" = {
     description = "VNC Server";
     wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.turbovnc ];
+    environment.DISPLAY = ":1";
     serviceConfig = {
       Type = "simple";
       Enable = true;
-      ExecStart = "${pkgs.turbovnc}/bin/vncserver :0";
-      ExecStop = "${pkgs.turbovnc}/bin/vncserver -kill :0";
+      ExecStart = pkgs.writeShellScript "start-vnc-server.sh" ''
+        # HACK: This presumes kde is installed and the current-system has this available, but for the moment that should
+        # be true.
+        ${pkgs.turbovnc}/bin/vncserver -fg -xstartup /run/current-system/sw/bin/startplasma-x11 $DISPLAY
+      '';
+      ExecStop = "${pkgs.turbovnc}/bin/vncserver -kill :1";
       User = "jfredett";
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 5900 5901 5902 5903 ];
+  
+
+
+  networking.firewall.allowedTCPPorts = [ 5901 ];
 
   hardware.nvidia = {
     modesetting.enable = true;
