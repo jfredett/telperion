@@ -90,6 +90,10 @@ sections:
       url: https://old.reddit.com/
       icon: favicon
       target: sametab
+    - title: Lobsters
+      url: https://lobste.rs
+      icon: favicon
+      target: sametab
     - title: Hachyderm.io
       url: https://hachyderm.io/
       icon: favicon
@@ -98,6 +102,25 @@ sections:
       url: https://www.instagram.com/
       icon: favicon
       target: sametab
+
+- name: Tools
+  items:
+      - title: strftime calculator
+        url: https://strftime.net/
+        icon: favicon
+        target: sametab
+      - title: CIDR calculator
+        url: https://www.ipaddressguide.com/cidr
+        icon: favicon
+        target: sametab
+      - title: Regex101
+        url: https://regex101.com/
+        icon: favicon
+        target: sametab
+      - title: crontab.guru
+        url: https://crontab.guru/
+        icon: favicon
+        target: sametab
 
 - name: Games
   items:
@@ -169,6 +192,25 @@ sections:
       url: https://app.youneedabudget.com/
       icon: favicon
       target: sametab
+
+- name: Lab
+  items:
+      - title: SSD Prices
+        url: https://diskprices.com/?locale=us&condition=new&capacity=4-&disk_types=internal_ssd
+        icon: favicon
+        target: sametab
+      - title: 3.5" Spinner Prices
+        url: https://diskprices.com/?locale=us&condition=new&capacity=12-&disk_types=internal_hdd,internal_sshd,internal_sas
+        icon: favicon
+        target: sametab
+      - title: Tape Prices
+        url: https://diskprices.com/?locale=us&condition=new&disk_types=lto7,lto8,lto9
+        icon: favicon
+        target: sametab
+      - title: LabGopher
+        url: https://labgopher.com/
+        icon: favicon
+        target: sametab
 
 - name: Widgets
   widgets:
