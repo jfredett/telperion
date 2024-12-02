@@ -12,8 +12,7 @@
     <apic/>
     <pae/>
   </features>
-  <cpu mode='custom' match='exact' check='none'>
-    <model fallback='forbid'>qemu64</model>
+  <cpu mode="host-passthrough" check="none">
     <topology sockets='1' dies='1' clusters='1' cores='8' threads='2'/>
   </cpu>
   <clock offset='utc'/>
