@@ -84,7 +84,7 @@ sections:
       icon: favicon
       target: sametab
 
-- name: Social Media
+- name: Comms and Social Media
   items:
     - title: Reddit
       url: https://old.reddit.com/
@@ -100,6 +100,14 @@ sections:
       target: sametab
     - title: Instagram
       url: https://www.instagram.com/
+      icon: favicon
+      target: sametab
+    - title: Bluesky
+      url: https://bsky.app/profile/jfredett.bsky.social
+      icon: favicon
+      target: sametab
+    - title: Gmail
+      url: https://mail.google.com/
       icon: favicon
       target: sametab
 
@@ -121,6 +129,10 @@ sections:
         url: https://crontab.guru/
         icon: favicon
         target: sametab
+      - title: Rust Combinators
+        url: https://rustcombinators.com/
+        favicon: favicon
+        target: sametab
 
 - name: Games
   items:
@@ -140,6 +152,21 @@ sections:
       url: https://virtualracingschool.appspot.com/#/Home
       icon: favicon
       target: sametab
+
+- name: News/Reading
+  items:
+      - title: MarketWatch
+        url: https://www.marketwatch.com/
+        icon: favicon
+        target: sametab
+      - title: Ars Technica
+        url: https://arstechnica.com/
+        icon: favicon
+        target: sametab
+      - title: Quanta Magazine
+        url: https://www.quantamagazine.org/
+        icon: favicon
+        target: sametab
 
 - name: Files
   defaultOpen: false
@@ -192,6 +219,14 @@ sections:
       url: https://app.youneedabudget.com/
       icon: favicon
       target: sametab
+    - title: Bank of America
+      url: https://www.bankofamerica.com/
+      icon: favicon
+      target: sametab
+    - title: TraderSync
+      url: https://app.tradersync.com/dashboard
+      icon: favicon
+      target: sametab
 
 - name: Lab
   items:
@@ -224,6 +259,22 @@ sections:
       #      location: 01440
       #    - type: calendar
       #
+    - type: public-holidays
+      options:
+        country: US
+        region: BOS
+        holidayType: all
+        monthsToShow: 12
+        lang: en
+      #    - type: gluetun-status
+      #      useProxy: true
+      #      options:
+      #        hostname: http://localhost:8000
+      #        visibleFields: public_ip,region,country,city,location,organisation,postal_code,timezone
+      #    - type: cve-vulnerabilitiest
+
+- name: Github
+  widgets:
     - type: github-profile-stats
       options:
         username: jfredett
@@ -232,16 +283,3 @@ sections:
           - jfredett/minas-tarwon
           - jfredett/brocard
           - jfredett/hazel
-    - type: public-holidays
-      options:
-        country: US
-        region: BOS
-        holidayType: all
-        monthsToShow: 12
-        lang: en
-    - type: gluetun-status
-      useProxy: true
-      options:
-        hostname: http://localhost:8000
-        visibleFields: public_ip,region,country,city,location,organisation,postal_code,timezone
-    - type: cve-vulnerabilitiest
