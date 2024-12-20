@@ -20,5 +20,5 @@ in rec {
       type = "network";
       definition = hostConfig.networks.ec-net;
     };
-  }
+  };
 }

@@ -1,9 +1,36 @@
 <domain type="kvm">
   <name>randy</name>
   <uuid>5e88ed91-0723-49a9-bc09-96f19dfb2df1</uuid>
-  <memory unit="KiB">67108864</memory>
-  <currentMemory unit="KiB">67108864</currentMemory>
+  <memory unit="GiB">32</memory>
+  <currentMemory unit="GiB">32</currentMemory>
   <vcpu placement="static">24</vcpu>
+  <cputune>
+    <vcpupin vcpu="0" cpuset="0"/>
+    <vcpupin vcpu="1" cpuset="2"/>
+    <vcpupin vcpu="2" cpuset="4"/>
+    <vcpupin vcpu="3" cpuset="6"/>
+    <vcpupin vcpu="4" cpuset="8"/>
+    <vcpupin vcpu="5" cpuset="10"/>
+    <vcpupin vcpu="6" cpuset="12"/>
+    <vcpupin vcpu="7" cpuset="14"/>
+    <vcpupin vcpu="8" cpuset="16"/>
+    <vcpupin vcpu="9" cpuset="18"/>
+    <vcpupin vcpu="10" cpuset="20"/>
+    <vcpupin vcpu="11" cpuset="22"/>
+    <vcpupin vcpu="12" cpuset="24"/>
+    <vcpupin vcpu="13" cpuset="26"/>
+    <vcpupin vcpu="14" cpuset="28"/>
+    <vcpupin vcpu="15" cpuset="30"/>
+    <vcpupin vcpu="16" cpuset="32"/>
+    <vcpupin vcpu="17" cpuset="34"/>
+    <vcpupin vcpu="18" cpuset="36"/>
+    <vcpupin vcpu="19" cpuset="38"/>
+    <vcpupin vcpu="20" cpuset="40"/>
+    <vcpupin vcpu="21" cpuset="42"/>
+    <vcpupin vcpu="22" cpuset="44"/>
+    <vcpupin vcpu="23" cpuset="46"/>
+    <vcpupin vcpu="24" cpuset="48"/>
+  </cputune>
   <os>
     <type arch="x86_64" machine="pc-i440fx-9.0">hvm</type>
   </os>

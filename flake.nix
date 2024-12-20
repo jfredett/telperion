@@ -76,7 +76,7 @@
           # laurelin/narya at least, ideally behind glamdring.
           home-manager.nixosModules.home-manager
           { home-manager.backupFileExtension = "backup"; }
-          nur.nixosModules.nur
+          nur.modules.nixos.default
           path
         ];
 
@@ -92,7 +92,7 @@
           # FIXME: I don't think these two things should be here, they should be behind
           # laurelin/narya at least, ideally behind glamdring.
           home-manager.nixosModules.home-manager
-          nur.nixosModules.nur
+          nur.modules.nixos.default
           ./cadaster/${name}
         ];
 
@@ -120,6 +120,7 @@
         pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
         randy = vmConfigFor ./emerald.city/roles/randy.nix;
         daktylos = vmConfigFor ./emerald.city/roles/daktylos.nix;
+        bill = vmConfigFor ./emerald.city/roles/bill.nix;
       };
     };
 
@@ -132,6 +133,7 @@
           pinky = ./emerald.city/domains/pinky.xml;
           randy = ./emerald.city/domains/randy.xml;
           daktylos = ./emerald.city/domains/daktylos.xml;
+          bill = ./emerald.city/domains/bill.xml;
         };
         networks = {
           ec-net = ./emerald.city/networks/ec-net.xml;

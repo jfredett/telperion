@@ -86,10 +86,11 @@
           bridge_name = "ec-dmz-bridge";
           loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
             domains = [
-              (loadFromFile domains.pinky)
               (loadFromFile domains.barge)
-              (loadFromFile domains.randy)
+              (loadFromFile domains.bill)
               (loadFromFile domains.daktylos)
+              (loadFromFile domains.pinky)
+              (loadFromFile domains.randy)
             ];
             networks = [
               (loadFromFile networks.ec-net)
@@ -103,6 +104,12 @@
               };
                 active = true;
                 volumes = [
+                  {
+                    definition = laurelin.lib.vm.volume.writeXML {
+                      name = "bill_disk";
+                      capacity = { count = 1; unit = "TiB"; };
+                    };
+                  }
                   {
                     definition = laurelin.lib.vm.volume.writeXML {
                       name = "daktylos_disk";

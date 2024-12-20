@@ -17,6 +17,8 @@
       <host mac="EC:17:00:00:00:00" name="pinky" ip="10.0.0.5"/>
       <host mac="EC:17:00:00:00:01" name="randy" ip="10.0.0.6"/>
       <host mac="EC:17:00:00:00:02" name="barge" ip="10.0.0.7"/>
+      <host mac='EC:17:00:00:00:03' name="bill" ip="10.0.0.8"/>
+      <host mac='EC:17:00:00:00:50' name="daktylos" ip="10.0.0.9"/>
     </dhcp>
   </ip>
 </network>
