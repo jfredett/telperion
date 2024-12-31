@@ -72,7 +72,7 @@
 
       jfredett = {
         enable = true;
-        mode = "dragon";
+        mode = "minimal";
       };
       builder.enable = true;
     };
