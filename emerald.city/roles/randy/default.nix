@@ -5,9 +5,13 @@
   ];
 
   config = {
+    # 3. glamdring? Automate code checkout/setup somehow (aiming toward impermanence.
+
     services.ollama = {
       enable = true;
       acceleration = "cuda";
+      host = "0.0.0.0";
+      openFirewall = true;
     };
 
     laurelin = {
