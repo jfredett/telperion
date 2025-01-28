@@ -19,6 +19,7 @@
       <host mac="EC:17:00:00:00:02" name="barge" ip="10.0.0.7"/>
       <host mac='EC:17:00:00:00:03' name="bill" ip="10.0.0.8"/>
       <host mac='EC:17:00:00:00:50' name="daktylos" ip="10.0.0.9"/>
+      <host mac='EC:17:00:00:00:50' name="odysseus" ip="10.0.0.10"/>
     </dhcp>
   </ip>
 </network>

@@ -31,8 +31,13 @@
           enable = true;
           manager = "kde";
         };
+        reverse-proxy = {
+          enable = true;
+          domain = "emerald.city";
+        };
+        docker.client.enable = true;
+        docker.registry.enable = true;
       };
-
 
       nfs = {
         "nancy.canon" = [
@@ -60,11 +65,15 @@
       };
     };
 
-    narya.users = {
-      home-manager.enable = true;
-      jfredett = {
-        enable = true;
-        mode = "standard";
+    narya = {
+      trusted-certificates.enable = true;
+
+      users = {
+        home-manager.enable = true;
+        jfredett = {
+          enable = true;
+          mode = "standard";
+        };
       };
     };
   };

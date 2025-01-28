@@ -120,7 +120,8 @@
         pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
         randy = vmConfigFor ./emerald.city/roles/randy.nix;
         daktylos = vmConfigFor ./emerald.city/roles/daktylos.nix;
-        bill = vmConfigFor ./emerald.city/roles/bill.nix;
+        odysseus = vmConfigFor ./emerald.city/roles/odysseus.nix;
+        #bill = vmConfigFor ./emerald.city/roles/bill.nix;
       };
     };
 
@@ -133,6 +134,7 @@
           pinky = ./emerald.city/domains/pinky.xml;
           randy = ./emerald.city/domains/randy.xml;
           daktylos = ./emerald.city/domains/daktylos.xml;
+          odysseus = ./emerald.city/domains/odysseus.xml;
           bill = ./emerald.city/domains/bill.xml;
         };
         networks = {

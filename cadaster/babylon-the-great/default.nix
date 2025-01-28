@@ -89,6 +89,7 @@
               (loadFromFile domains.barge)
               (loadFromFile domains.bill)
               (loadFromFile domains.daktylos)
+              (loadFromFile domains.odysseus)
               (loadFromFile domains.pinky)
               (loadFromFile domains.randy)
             ];
@@ -108,6 +109,12 @@
                     definition = laurelin.lib.vm.volume.writeXML {
                       name = "bill_disk";
                       capacity = { count = 1; unit = "TiB"; };
+                    };
+                  }
+                  {
+                    definition = laurelin.lib.vm.volume.writeXML {
+                      name = "odysseus_disk";
+                      capacity = { count = 250; unit = "GiB"; };
                     };
                   }
                   {

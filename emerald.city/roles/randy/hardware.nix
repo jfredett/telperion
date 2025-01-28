@@ -9,7 +9,7 @@ in {
   ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   boot.kernelPackages = kernelPkg;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
