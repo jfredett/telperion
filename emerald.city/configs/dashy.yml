@@ -86,10 +86,6 @@ sections:
 
 - name: Comms and Social Media
   items:
-    - title: Reddit
-      url: https://old.reddit.com/
-      icon: favicon
-      target: sametab
     - title: Lobsters
       url: https://lobste.rs
       icon: favicon
