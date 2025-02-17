@@ -7,6 +7,9 @@
 
   config = {
 
+    # TODO: Steam support
+    # TODO: Probably do some kind of verification that I can get controllers hooked in and recognized by steam
+
     laurelin = {
       infra = {
      #   canon = "10.255.1.2";
@@ -26,6 +29,10 @@
         promtail = {
           enable = true;
           lokiUrl = "http://loki.emerald.city";
+        };
+        _1password = {
+          enable = true;
+          withGUI = true;
         };
         prometheus.exporters = {
           node = {
