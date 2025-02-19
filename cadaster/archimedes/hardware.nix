@@ -11,6 +11,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
 
+  hardware.xone.enable = true;
+  hardware.xpadneo.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  boot.extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
