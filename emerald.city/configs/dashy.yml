@@ -269,7 +269,12 @@ sections:
       #        visibleFields: public_ip,region,country,city,location,organisation,postal_code,timezone
       #    - type: cve-vulnerabilitiest
 
-- name: Github
+- name: Code
+  items:
+    - title: Codeberg
+      url: https://codeberg.org
+      icon: favicon
+      target: sametab
   widgets:
     - type: github-profile-stats
       options:
