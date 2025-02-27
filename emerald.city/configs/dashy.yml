@@ -30,6 +30,13 @@ appConfig:
 
 # Main content - An array of sections, each containing an array of items
 sections:
+- name: Research
+  icon: fas fa-book
+  items:
+    - title: SciHub
+      url: https://sci-hub.st/
+
+      target: sametab
 - name: Metrics and Monitoring
   icon: fas fa-chart-line
   items:
