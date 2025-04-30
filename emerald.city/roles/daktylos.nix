@@ -42,12 +42,18 @@
         mac = "02:ec:17:00:00:50";
       };
 
-      /*
       nfs = {
         "nancy.canon" = [
+          {
+            name = "prometheus-data";
+            path = "/var/lib/prometheus-data";
+            user = "prometheus";
+            group = "prometheus";
+            host_path = "volume1";
+            options = "";
+          }
         ];
       };
-      */
 
       services = {
         promtail = {
@@ -91,6 +97,10 @@
         prometheus = {
           host = {
             enable = true;
+            # Technically this is the default, but explicit is better than implicit.
+            # stateDir = "prometheus-data";
+            # TODO: Tune this relative to the size of the data retained.
+            # retentionTime = "30d";
             scrapeConfigs = root.scrapeTargets ++ [
               {
                 job_name = "emerald-city-torrent";
@@ -113,6 +123,24 @@
               # TODO: Extract defaultDomain somehow?
               domain = "emerald.city";
             };
+
+            /*
+            ipmi = {
+              enable = true;
+              domain = "emerald.city";
+              # TODO: Invert this dependency
+              monitoredHosts = [
+                {
+                  name = "babylon-the-great";
+                  ip = "10.255.255.2";
+                }
+                {
+                  name = "dragon-of-perdition";
+                  ip = "10.255.255.3";
+                }
+              ];
+            };
+            */
 
             systemd = {
               enable = true;

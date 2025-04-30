@@ -5,4 +5,9 @@ in with disks.lib; {
     device = disk "nvme-0";
     fsType = "ext4";
   };
+
+  fileSystems."/" = {
+    device = disk "sda";
+    fsType = "ext4";
+  };
 }

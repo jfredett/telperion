@@ -29,7 +29,6 @@
     <vcpupin vcpu="21" cpuset="42"/>
     <vcpupin vcpu="22" cpuset="44"/>
     <vcpupin vcpu="23" cpuset="46"/>
-    <vcpupin vcpu="24" cpuset="48"/>
   </cputune>
   <os>
     <type arch="x86_64" machine="pc-i440fx-9.0">hvm</type>

@@ -37,6 +37,12 @@
           };
           */
         };
+
+        wayvnc = {
+          server = {
+            enable = false;
+          };
+        };
         promtail = {
           enable = true;
           lokiUrl = "http://loki.emerald.city";
@@ -73,6 +79,11 @@
           {
             name = "docker";
             path = "/mnt/docker";
+            host_path = "volume1";
+          }
+          {
+            name = "Garage";
+            path = "/mnt/Garage";
             host_path = "volume1";
           }
           {

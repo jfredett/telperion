@@ -5,7 +5,7 @@
     ./network.nix
     ./storage.nix
 
-    laurelin.nixosModules.netbootable
+    # laurelin.nixosModules.netbootable
   ];
 
   config = {
@@ -15,10 +15,10 @@
         standard-packages.enable = false;
       };
 
-      netboot = {
-        netbootable = true;
-        mac = "90:8d:6e:c3:60:64";
-      };
+      # netboot = {
+      #   netbootable = true;
+      #   mac = "90:8d:6e:c3:60:64";
+      # };
 
       services = {
         promtail = {

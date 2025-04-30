@@ -87,7 +87,6 @@
           loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
             domains = [
               (loadFromFile domains.barge)
-              (loadFromFile domains.bill)
               (loadFromFile domains.daktylos)
               (loadFromFile domains.odysseus)
               (loadFromFile domains.pinky)

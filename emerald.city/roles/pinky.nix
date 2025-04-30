@@ -4,6 +4,23 @@
   ];
 
   config = {
+
+    services.openiscsi = {
+      enable = true;
+      discoverPortal = "10.255.1.7:3260";
+      name = "iqn2000-01.com.synology:Nancy.default-target.d791046e0e8";
+    };
+
+    environment.systemPackages = with pkgs; [
+      openiscsi
+    ];
+
+    # fileSystems."/mnt/iscsi/" = {
+
+
+    # }
+
+
     networking = {
       hostName = "pinky";
       domain = "emerald.city";
@@ -57,7 +74,11 @@
 
     narya.users = {
       passwordLogin = true;
-      jfredett.enable = true;
+      home-manager.enable = true;
+      jfredett = {
+        enable = true;
+        mode = "pinky";
+      };
     };
   };
 }

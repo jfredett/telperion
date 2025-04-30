@@ -1,5 +1,9 @@
 { config, lib, pkgs, modulesPath, ... }: let
 in {
+
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda" ;
+
   networking = {
     hostName = "dragon-of-perdition";
     dhcpcd.enable = false;
