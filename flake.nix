@@ -10,12 +10,12 @@
     };
 
     laurelin = {
-      url = "git+file:/home/jfredett/code/minas-tarwon/laurelin";
+      url = "git+file:../laurelin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     narya = {
-      url = "git+file:/home/jfredett/code/minas-tarwon/narya";
+      url = "git+file:../narya";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -27,7 +27,7 @@
     };
 
     glamdring = {
-      url = "git+file:/home/jfredett/code/minas-tarwon/glamdring";
+      url = "git+file:../glamdring";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
