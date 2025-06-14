@@ -33,17 +33,18 @@
 
 
     networking = {
-      hostName = "odysseus";
+      firewall.allowedTCPPorts = [ 22 80 443 6443 ];
       domain = "emerald.city";
       nameservers = [ "10.255.0.3" ];
-      firewall.allowedTCPPorts = [ 22 80 443 6443 ];
+
       useDHCP = false;
+      hostName = "odysseus-02";
       interfaces = {
         ens3 = {
           useDHCP = false;
           ipv4 = {
             addresses = [{
-              address = "10.255.1.10";
+              address = "10.255.1.11";
               prefixLength = 16;
             }];
           };
@@ -57,7 +58,7 @@
 
     laurelin = {
       infra = {
-        canon = "10.255.1.10";
+        canon = "10.255.1.11";
       };
 
       # netboot = {

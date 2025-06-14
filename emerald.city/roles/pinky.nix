@@ -1,6 +1,5 @@
 { config, lib, pkgs, root, laurelin, ... }: {
   imports = [
-    laurelin.nixosModules.netbootable
   ];
 
   config = {
@@ -29,11 +28,6 @@
     laurelin = {
       infra = {
         canon = "10.255.1.69";
-      };
-
-      netboot = {
-        netbootable = true;
-        mac = "02:ec:17:00:00:69";
       };
 
       services = {

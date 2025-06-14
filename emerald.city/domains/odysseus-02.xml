@@ -1,10 +1,10 @@
 <domain type='kvm'>
-  <name>barge</name>
-  <uuid>76235e57-42d1-4a8d-b6cb-9b59540b0c1a</uuid>
-  <memory unit='MiB'>16384</memory>
-  <currentMemory unit='MiB'>16384</currentMemory>
-  <vcpu placement='static'>16</vcpu>
-  <os firmware="efi">
+  <name>odysseus-02</name>
+  <uuid>86235e57-42d1-4a8d-b6cb-000000000002</uuid>
+  <memory unit='MiB'>8192</memory>
+  <currentMemory unit='MiB'>8192</currentMemory>
+  <vcpu placement='static'>8</vcpu>
+  <os>
     <type arch='x86_64' machine='pc-i440fx-9.0'>hvm</type> 
   </os>
   <features>
@@ -13,7 +13,7 @@
     <pae/>
   </features>
   <cpu mode="host-passthrough" check="none">
-    <topology sockets='1' dies='1' clusters='1' cores='8' threads='2'/>
+    <topology sockets='1' dies='1' clusters='1' cores='4' threads='2'/>
   </cpu>
   <clock offset='utc'/>
   <on_poweroff>destroy</on_poweroff>
@@ -21,26 +21,20 @@
   <on_crash>destroy</on_crash>
   <devices>
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
-    <disk type="file" device="cdrom">
-      <driver name="qemu" type="raw" />
-      <source file="/mnt/tank/vm/refind-0.14.2.img" />
-      <target dev="hdrf" bus="ide" />
-      <address type="drive" controller="0" bus="1" target="0" unit="0" />
-      <readonly />
-      <boot order="1" />
-    </disk>
+    <!-- <disk type="file" device="cdrom"> -->
+    <!--   <driver name="qemu" type="raw" /> -->
+    <!--   <source file="/mnt/tank/vm/latest-nixos-minimal-x86_64-linux.iso" /> -->
+    <!--   <target dev="hdrf" bus="ide" /> -->
+    <!--   <address type="drive" controller="0" bus="1" target="0" unit="0" /> -->
+    <!--   <readonly /> -->
+    <!--   <boot order="1" /> -->
+    <!-- </disk> -->
     <disk type="file" device="disk">
       <driver name="qemu" type="raw"/>
-      <source file="/mnt/tank/vm/barge_root"/>
-      <target dev="hdr" bus="ide"/>
-      <address type="drive" controller="0" bus="0" target="0" unit="1"/>
-      <boot order="2"/>
-    </disk>
-    <disk type="file" device="disk">
-      <driver name="qemu" type="raw"/>
-      <source file="/mnt/tank/vm/barge_disk"/>
+      <source file="/mnt/tank/vm/odysseus_disk_02"/>
       <target dev="hda" bus="ide"/>
       <address type="drive" controller="0" bus="0" target="0" unit="0"/>
+      <boot order="2" />
     </disk>
     <controller type='usb' index='0' model='piix3-uhci'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x2'/>
@@ -50,16 +44,22 @@
       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
     </controller>
     <interface type='bridge'>
-      <mac address='02:ec:17:00:00:00'/>
+      <mac address='02:ec:17:00:00:12'/>
+      <source bridge='ec-dmz-bridge'/>
+      <model type='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x03' function='0x0'/>
+    </interface>
+    <interface type='network'>
+      <mac address='02:ec:17:f0:00:12'/>
+      <source network='ec-net'/>
+      <model type='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x04' function='0x0'/>
+    </interface>
+    <interface type='bridge'>
+      <mac address='02:ec:17:00:00:12'/>
       <source bridge='ec-dmz-bridge'/>
       <model type='virtio'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
-    </interface>
-    <interface type='network'>
-      <mac address='02:ec:17:f0:00:00'/>
-      <source network='ec-net'/>
-      <model type='virtio'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
     </interface>
     <serial type='pty'>
       <target type='isa-serial' port='0'>

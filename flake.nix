@@ -45,7 +45,6 @@
       canonConf = let
         root = import ./cadaster { inherit dns; };
         configs = map (c: c.config.laurelin.infra.dns) (attrValues self.nixosConfigTree.canon);
-      #in mkZoneString "canon" (mkMerge (configs ++ root));
       in mkZoneString "canon" (mkMerge (configs ++ root));
     in {
       zones = {
@@ -77,6 +76,7 @@
           home-manager.nixosModules.home-manager
           { home-manager.backupFileExtension = "backup"; }
           nur.modules.nixos.default
+
           path
         ];
 
@@ -120,8 +120,10 @@
         pinky = vmConfigFor ./emerald.city/roles/pinky.nix;
         randy = vmConfigFor ./emerald.city/roles/randy.nix;
         daktylos = vmConfigFor ./emerald.city/roles/daktylos.nix;
-        odysseus = vmConfigFor ./emerald.city/roles/odysseus.nix;
-        #bill = vmConfigFor ./emerald.city/roles/bill.nix;
+        odysseus-01 = vmConfigFor ./emerald.city/roles/odysseus-01/default.nix;
+        odysseus-02 = vmConfigFor ./emerald.city/roles/odysseus-02/default.nix;
+        odysseus-03 = vmConfigFor ./emerald.city/roles/odysseus-03/default.nix;
+        bill = vmConfigFor ./emerald.city/roles/bill.nix;
       };
     };
 
@@ -134,7 +136,9 @@
           pinky = ./emerald.city/domains/pinky.xml;
           randy = ./emerald.city/domains/randy.xml;
           daktylos = ./emerald.city/domains/daktylos.xml;
-          odysseus = ./emerald.city/domains/odysseus.xml;
+          odysseus-01 = ./emerald.city/domains/odysseus-01.xml;
+          odysseus-02 = ./emerald.city/domains/odysseus-02.xml;
+          odysseus-03 = ./emerald.city/domains/odysseus-03.xml;
           bill = ./emerald.city/domains/bill.xml;
         };
         networks = {

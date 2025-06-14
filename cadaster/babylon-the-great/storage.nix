@@ -2,7 +2,7 @@
 # Alternate module name: "We have disko at home"
 { config, lib, pkgs, modulesPath, narya, ... }: with lib; let
   # TODO: Move this over to narya
-  devices = narya.infra.disks.btg; 
+  devices = narya.infra.disks.btg;
   zfs = with devices.lib; {
     pools = {
       tank = {
@@ -154,8 +154,23 @@ in {
     formatting = cfg.mode == "format";
   in {
     # A oneshot, manually-run service to run the prepare-zfs script
-    environment.systemPackages = mkIf formatting [ prepareZFS ];
+    environment.systemPackages = [ pkgs.zfs prepareZFS ];
 
+    boot.supportedFilesystems = [ "zfs" ];
+    networking.hostId = "BAB71017";
     boot.zfs.extraPools = mkIf mounting [ poolName ];
+
+    # Mount the OS disk(s)
+
+    fileSystems."/" = {
+      device = "/dev/disk/by-label/nixos";
+      fsType = "ext4";
+    };
+
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-label/BOOT";
+      fsType = "vfat";
+      options = [ "umask=0022" "uid=0" "gid=0" ];
+    };
   };
 }

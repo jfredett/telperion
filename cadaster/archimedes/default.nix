@@ -6,6 +6,12 @@
   ];
 
   config = {
+    environment.systemPackages = with pkgs; [
+      obs-studio
+      obs-cmd
+      obs-studio-plugins.obs-ndi
+    ];
+
 
     laurelin = {
       infra = {

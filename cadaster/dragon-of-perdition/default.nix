@@ -5,19 +5,38 @@
     ./network.nix
     ./storage.nix
 
-    laurelin.nixosModules.netbootable
   ];
 
-  config = {
+  config = let
+    gpu_id = "xxxx:xxxx";
+  in {
+    # boot.kernelParams = [ "intel_iommu=on" "iommu=pt" "rd.driver.pre=vfio-pci" ];
+    # boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
+    # boot.kernelModules = [
+    #   "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio"
+    #   "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"
+    # ];
+
+    # boot.extraModprobeConfig = ''
+    #   options vfio-pci ids=${p40id}
+    # '';
+
+    # boot.postBootCommands = /* bash */ ''
+    #   DEVS="${p40id}"
+
+    #   for DEV in $DEVS; do
+    #     echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+    #   done
+
+    #   modprobe -i vfio-pci
+    # '';
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.efiSysMountPoint = "/boot";
+
     laurelin = {
       infra = {
         canon = "10.255.1.3";
         standard-packages.enable = false;
-      };
-
-      netboot = {
-        netbootable = true;
-        mac = "90:8d:6e:c3:60:64";
       };
 
       services = {
@@ -72,7 +91,7 @@
 
       jfredett = {
         enable = true;
-        mode = "minimal";
+        mode = "dragon";
       };
       builder.enable = true;
     };

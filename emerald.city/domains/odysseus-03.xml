@@ -1,6 +1,6 @@
 <domain type='kvm'>
-  <name>odysseus</name>
-  <uuid>86235e57-42d1-4a8d-b6cb-000000000000</uuid>
+  <name>odysseus-03</name>
+  <uuid>86235e57-42d1-4a8d-b6cb-000000000003</uuid>
   <memory unit='MiB'>8192</memory>
   <currentMemory unit='MiB'>8192</currentMemory>
   <vcpu placement='static'>8</vcpu>
@@ -21,11 +21,20 @@
   <on_crash>destroy</on_crash>
   <devices>
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
+    <!-- <disk type="file" device="cdrom"> -->
+    <!--   <driver name="qemu" type="raw" /> -->
+    <!--   <source file="/mnt/tank/vm/latest-nixos-minimal-x86_64-linux.iso" /> -->
+    <!--   <target dev="hdrf" bus="ide" /> -->
+    <!--   <address type="drive" controller="0" bus="1" target="0" unit="0" /> -->
+    <!--   <readonly /> -->
+    <!--   <boot order="1" /> -->
+    <!-- </disk> -->
     <disk type="file" device="disk">
       <driver name="qemu" type="raw"/>
-      <source file="/mnt/tank/vm/odysseus_disk"/>
+      <source file="/mnt/tank/vm/odysseus_disk_03"/>
       <target dev="hda" bus="ide"/>
       <address type="drive" controller="0" bus="0" target="0" unit="0"/>
+      <boot order="2" />
     </disk>
     <controller type='usb' index='0' model='piix3-uhci'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x2'/>
@@ -35,17 +44,16 @@
       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
     </controller>
     <interface type='bridge'>
-      <mac address='02:ec:17:00:00:10'/>
+      <mac address='02:ec:17:00:00:13'/>
       <source bridge='ec-dmz-bridge'/>
       <model type='virtio'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
-      <boot order="1"/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x03' function='0x0'/>
     </interface>
     <interface type='network'>
-      <mac address='02:ec:17:f0:00:10'/>
+      <mac address='02:ec:17:f0:00:13'/>
       <source network='ec-net'/>
       <model type='virtio'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x04' function='0x0'/>
     </interface>
     <serial type='pty'>
       <target type='isa-serial' port='0'>
@@ -61,8 +69,8 @@
     </channel>
     <input type='mouse' bus='ps2'/>
     <input type='keyboard' bus='ps2'/>
-    <graphics type="vnc" port="5910" autoport="no" listen="0.0.0.0">
-      <listen type="address" address="0.0.0.0"/>
+    <graphics type="spice" port="-1" tlsPort="-1" autoport="yes">
+        <gl enable="no"/>
     </graphics>
     <audio id='1' type='none'/>
     <video>

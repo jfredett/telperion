@@ -5,7 +5,6 @@
     ../hardware/nvidia/p40.nix
     ./network.nix
     ./storage.nix
-    laurelin.nixosModules.netbootable
   ];
 
   config = let
@@ -34,6 +33,9 @@
       modprobe -i vfio-pci
     '';
 
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.efiSysMountPoint = "/boot";
+
     # programs.mdevctl.enable = true;
     # hardware.nvidia.vgpu.enable = true; # Enable NVIDIA KVM vGPU + GRID driver
     # hardware.nvidia.vgpu.unlock.enable = true; # Unlock vGPU functionality on consumer cards using DualCoder/vgpu_unlock project.
@@ -48,7 +50,7 @@
       passwordLogin = false;
       jfredett = {
         enable = true;
-        mode = "dragon";
+        mode = "minimal";
       };
       builder.enable = true;
     };
@@ -59,16 +61,12 @@
         standard-packages.enable = true;
       };
 
-      netboot = {
-        netbootable = true;
-        mac = "74:86:7a:e4:0e:74";
-      };
-
       services = {
         promtail = {
           enable = true;
           lokiUrl = "http://loki.emerald.city";
         };
+
         prometheus.exporters = {
           node = {
             enable = true;
@@ -87,10 +85,12 @@
           loadout = with laurelin.lib.vm; with root.domains."emerald.city"; {
             domains = [
               (loadFromFile domains.barge)
-              (loadFromFile domains.bill)
-              (loadFromFile domains.daktylos)
-              (loadFromFile domains.odysseus)
-              (loadFromFile domains.pinky)
+              # (loadFromFile domains.bill)
+              # (loadFromFile domains.daktylos)
+              (loadFromFile domains.odysseus-01)
+              (loadFromFile domains.odysseus-02)
+              (loadFromFile domains.odysseus-03)
+              # (loadFromFile domains.pinky)
               (loadFromFile domains.randy)
             ];
             networks = [
@@ -113,7 +113,19 @@
                   }
                   {
                     definition = laurelin.lib.vm.volume.writeXML {
-                      name = "odysseus_disk";
+                      name = "odysseus_disk_01";
+                      capacity = { count = 250; unit = "GiB"; };
+                    };
+                  }
+                  {
+                    definition = laurelin.lib.vm.volume.writeXML {
+                      name = "odysseus_disk_02";
+                      capacity = { count = 250; unit = "GiB"; };
+                    };
+                  }
+                  {
+                    definition = laurelin.lib.vm.volume.writeXML {
+                      name = "odysseus_disk_03";
                       capacity = { count = 250; unit = "GiB"; };
                     };
                   }
@@ -127,6 +139,12 @@
                     definition = laurelin.lib.vm.volume.writeXML {
                       name = "randy_disk";
                       capacity = { count = 1; unit = "TiB"; };
+                    };
+                  }
+                  {
+                    definition = laurelin.lib.vm.volume.writeXML {
+                      name = "barge_root";
+                      capacity = { count = 250; unit = "GiB"; };
                     };
                   }
                   {
