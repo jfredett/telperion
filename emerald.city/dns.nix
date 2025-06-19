@@ -22,6 +22,10 @@ in {
     "lidarr".CNAME = [(cname "barge.emerald.city.")];
     "bazarr".CNAME = [(cname "barge.emerald.city.")];
     "grocy".CNAME = [(cname "barge.emerald.city.")];
+    "foundry".CNAME = [(cname "barge.emerald.city.")];
+    "affine".CNAME = [(cname "barge.emerald.city.")];
+    "postgres".CNAME = [(cname "barge.emerald.city.")];
+    "redis".CNAME = [(cname "barge.emerald.city.")];
     "odysseus".CNAME = [(cname "odysseus-01.emerald.city")];
 
     # TODO: Move this to barge (or better, to k3s when I get it set up properly=

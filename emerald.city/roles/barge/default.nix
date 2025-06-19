@@ -84,6 +84,13 @@
             configRoot = "/mnt/local";
           };
 
+          affine = {
+            enable = true;
+            uploadLocation = "/mnt/local/affine/upload";
+            confRoot = "/mnt/local/affine/config";
+          };
+          postgres.confRoot = "/mnt/local/postgres";
+
           gluetun.enable = true;
         };
       };

@@ -61,11 +61,6 @@
         canon = "10.255.1.10";
       };
 
-      # netboot = {
-      #   netbootable = false;
-      #   mac = "02:ec:17:00:00:10";
-      # };
-
       nfs = {
         "nancy.canon" = [
           # {
@@ -84,10 +79,8 @@
           enable = true;
           lokiUrl = "http://loki.emerald.city";
         };
-
       };
     };
-
 
     narya = {
       trusted-certificates.enable = true;

@@ -123,7 +123,7 @@
         odysseus-01 = vmConfigFor ./emerald.city/roles/odysseus-01/default.nix;
         odysseus-02 = vmConfigFor ./emerald.city/roles/odysseus-02/default.nix;
         odysseus-03 = vmConfigFor ./emerald.city/roles/odysseus-03/default.nix;
-        bill = vmConfigFor ./emerald.city/roles/bill.nix;
+        # bill = vmConfigFor ./emerald.city/roles/bill.nix;
       };
     };
 
@@ -139,7 +139,7 @@
           odysseus-01 = ./emerald.city/domains/odysseus-01.xml;
           odysseus-02 = ./emerald.city/domains/odysseus-02.xml;
           odysseus-03 = ./emerald.city/domains/odysseus-03.xml;
-          bill = ./emerald.city/domains/bill.xml;
+          #bill = ./emerald.city/domains/bill.xml;
         };
         networks = {
           ec-net = ./emerald.city/networks/ec-net.xml;
