@@ -54,7 +54,7 @@
       services = {
         reverse-proxy = {
           enable = true;
-          fqdn.port = 8001;
+          fqdn.port = 8081;
         };
 
         promtail = {
