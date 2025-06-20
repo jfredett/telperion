@@ -113,6 +113,12 @@
           };
           postgres.confRoot = "/mnt/local/postgres";
 
+          foundry = {
+            enable = true;
+            confRoot = "/mnt/local/foundry";
+            version = "12";
+          };
+
           gluetun.enable = true;
         };
       };
