@@ -31,6 +31,25 @@
       };
     };
 
+    boot.kernel.sysctl = {
+      "net.core.rmem_max" = 2500000;
+    };
+    services.cloudflared = {
+      enable = true;
+      tunnels = {
+        "infinite-dungeon" = {
+          credentialsFile = "/root/.cloudflared/credentials.json";
+          certificateFile = "/root/.cloudflared/cert.pem";
+          default = "http_status:404";
+          ingress = {
+            "wiki.goml.games" = {
+              service = "http://affine.emerald.city";
+            };
+          };
+        };
+      };
+    };
+
     laurelin = {
       infra = {
         canon = "10.255.1.70";
