@@ -23,7 +23,7 @@ in {
     "bazarr".CNAME = [(cname "barge.emerald.city.")];
     "grocy".CNAME = [(cname "barge.emerald.city.")];
     "foundry".CNAME = [(cname "barge.emerald.city.")];
-    "affine".CNAME = [(cname "barge.emerald.city.")];
+    "outline".CNAME = [(cname "barge.emerald.city.")];
     "postgres".CNAME = [(cname "barge.emerald.city.")];
     "redis".CNAME = [(cname "barge.emerald.city.")];
     "odysseus".CNAME = [(cname "odysseus-01.emerald.city")];

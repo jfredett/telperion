@@ -42,8 +42,12 @@
           certificateFile = "/root/.cloudflared/cert.pem";
           default = "http_status:404";
           ingress = {
+            "infinite-dungeon.goml.games" = {
+              service = "http://localhost:30000";
+            };
             "wiki.goml.games" = {
-              service = "http://affine.emerald.city";
+              service = "http://localhost:10000";
+            };
             };
           };
         };
@@ -103,10 +107,9 @@
             configRoot = "/mnt/local";
           };
 
-          affine = {
+          outline = {
             enable = true;
-            uploadLocation = "/mnt/local/affine/upload";
-            confRoot = "/mnt/local/affine/config";
+            dataLocation = "/mnt/local/outline";
           };
           postgres.confRoot = "/mnt/local/postgres";
 
