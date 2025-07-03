@@ -48,6 +48,9 @@
             "wiki.goml.games" = {
               service = "http://localhost:10000";
             };
+            "grist.goml.games" = {
+              service = "http://localhost:8484";
+            };
             };
           };
         };
@@ -116,7 +119,12 @@
           foundry = {
             enable = true;
             confRoot = "/mnt/local/foundry";
-            version = "12";
+            version = "13";
+          };
+
+          grist = {
+            enable = true;
+            confRoot = "/mnt/local/grist";
           };
 
           gluetun.enable = true;
