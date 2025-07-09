@@ -51,6 +51,8 @@
             "grist.goml.games" = {
               service = "http://localhost:8484";
             };
+            "5e.goml.games" = {
+              service = "http://localhost:7775";
             };
           };
         };
@@ -122,12 +124,23 @@
             version = "13";
           };
 
+          fivey-tools = {
+            enable = false;
+            confRoot = "/mnt/local/5etools";
+          };
+
           grist = {
             enable = true;
             confRoot = "/mnt/local/grist";
           };
 
           gluetun.enable = true;
+
+          keycloak = {
+            enable = true;
+            bootstrapping = true;
+            confRoot = "/mnt/local/keycloak";
+          };
         };
       };
     };
