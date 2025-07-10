@@ -36,5 +36,9 @@ in {
     "loki".CNAME = [(cname "daktylos.emerald.city.")];
     "prom-exporter".CNAME = [(cname "daktylos.emerald.city.")];
     "prometheus".CNAME = [(cname "daktylos.emerald.city.")];
+
+
+    # K8s work in progress
+    "foundry-k8s".CNAME = [(cname "odysseus-01.emerald.city.")];
   };
 }
