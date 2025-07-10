@@ -34,6 +34,7 @@
     boot.kernel.sysctl = {
       "net.core.rmem_max" = 2500000;
     };
+
     services.cloudflared = {
       enable = true;
       tunnels = {
@@ -50,7 +51,6 @@
             };
             "grist.goml.games" = {
               service = "http://localhost:8484";
-            };
             };
           };
         };
@@ -152,6 +152,5 @@
       device = "/dev/sda";
       fsType = "ext4";
     };
-
   };
 }
