@@ -55,6 +55,10 @@
 
         k3s = {
           enable = true;
+          nfs = {
+            enable = true;
+            host = "nancy.canon";
+          };
           role = "server";
         };
       };
