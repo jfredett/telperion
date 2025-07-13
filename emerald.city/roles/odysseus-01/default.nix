@@ -59,6 +59,7 @@
             enable = true;
             host = "nancy.canon";
           };
+          vault-operator.enable = true;
           role = "server";
         };
       };
