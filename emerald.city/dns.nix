@@ -19,7 +19,8 @@ in {
     "grocy".CNAME = [(cname "barge.emerald.city.")];
     "jellyfin".CNAME = [(cname "barge.emerald.city.")];
     "lidarr".CNAME = [(cname "barge.emerald.city.")];
-    "odysseus".CNAME = [(cname "odysseus-01.emerald.city")];
+    "odysseus".CNAME = [(cname "odysseus-01.emerald.city.")];
+    "vault".CNAME = [(cname "odysseus-01.emerald.city.")];
     "outline".CNAME = [(cname "barge.emerald.city.")];
     "postgres".CNAME = [(cname "barge.emerald.city.")];
     "prowlarr".CNAME = [(cname "barge.emerald.city.")];
