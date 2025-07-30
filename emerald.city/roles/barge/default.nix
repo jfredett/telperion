@@ -102,7 +102,7 @@
 
           dashy = {
             enable = true;
-            conf = builtins.readFile ../../configs/dashy.yml;
+            conf = narya.infra.dashy.config;
           };
 
           grocy = {
