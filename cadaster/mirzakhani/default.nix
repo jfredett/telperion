@@ -1,5 +1,5 @@
 { dns, ... }: with dns.lib.combinators; {
   subdomains = {
-    mirzakhani.A = [(a "10.255.1.12")];
+    mirzakhani.A = [(a "10.255.1.7")];
   };
 }
