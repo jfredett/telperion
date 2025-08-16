@@ -2,6 +2,7 @@
   imports = [
     # TODO: Should this be a module instead of an import?
     ../hardware/r730.nix
+    ../hardware/nvidia/2080.nix
     ./network.nix
     ./storage.nix
 
@@ -53,6 +54,12 @@
             enable = true;
             domain = "canon";
           };
+        };
+        window-manager = {
+          enable = true;
+          # manager = "hyprland";
+          manager = "kde";
+          gpu = "nvidia";
         };
 
         /*
